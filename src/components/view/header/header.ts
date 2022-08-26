@@ -2,7 +2,7 @@ class Header {
   pages = ['Login', 'Main', 'Learn', 'Train'];
 
   constructor() {
-
+    console.log('header_constructor_stub');
   }
 
   draw(): HTMLElement {

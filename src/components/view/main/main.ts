@@ -1,6 +1,6 @@
 class MainSection {
   constructor() {
-
+    console.log('main_constructor_stub');
   }
 
   draw(): HTMLElement {
