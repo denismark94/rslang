@@ -1,5 +1,4 @@
 class LearnView {
-
   constructor() {
   }
 }

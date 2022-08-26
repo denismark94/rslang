@@ -7,10 +7,8 @@ class Footer {
     const year = document.createElement('span');
     year.textContent = '2022';
     const rslogo = document.createElement('img');
-    rslogo.setAttribute(
-      'src',
-      'https://app.rs.school/static/images/logo-rsschool3.png'
-    );
+    const logosrc = 'https://app.rs.school/static/images/logo-rsschool3.png';
+    rslogo.setAttribute('src', logosrc);
     element.appendChild(github);
     element.appendChild(year);
     element.appendChild(rslogo);
