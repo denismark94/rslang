@@ -12,7 +12,7 @@ class Model {
     return fetch(url).then((responce) => responce.json());
   }
 
-  createUser(user: object) {
+  createUser(user: IUser) {
     return fetch(this.baseURL + '/users', {
       method: 'POST',
       headers: {
@@ -21,6 +21,17 @@ class Model {
       },
       body: JSON.stringify(user),
     }).then((resp) => resp.json());
+  }
+
+  login(user: IUser) {
+    return fetch(this.baseURL + '/signin', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    }).then((response) => response.json());
   }
 }
 

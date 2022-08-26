@@ -1,5 +1,6 @@
 import View from '../view/view';
 import Model from '../model/model';
+import IUser from '../model/iuser';
 class App {
   public view: View;
 
@@ -25,6 +26,13 @@ class App {
   }
 
   testAPI(command: string) {
+    const user = {
+      name: 'Bob',
+      email: 'bob@hotmail.com',
+      password: 'password',
+      id: '',
+      token: '',
+    };
     switch (command) {
       case 'page':
         this.model
@@ -34,17 +42,25 @@ class App {
         break;
       case 'create':
         this.model
-          .createUser({
-            "name": 'Alice',
-            "email": 'alice@hotmail.com',
-            "password": 'pAs$word'
+          .createUser(user)
+          .then((data) => {
+            user.id = <string>(<IUser>data).id;
           })
-          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'login':
+        this.model
+          .login(user)
+          .then((data) => {
+            user.token = <string>(<IUser>data).token;
+            user.id = (<{ userId: string }>data).userId;
+          })
           .catch((err) => console.log(err));
         break;
       default:
         break;
     }
+    console.log(user);
   }
 }
 
