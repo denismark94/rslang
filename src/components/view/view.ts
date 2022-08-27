@@ -22,9 +22,27 @@ class View {
     this.state = 'main';
   }
 
-  draw() {
+  draw(state: string) {
+    document.body.innerHTML = '';
     const header = this.header.draw();
-    const section = this.main.draw();
+    let section = this.main.draw();
+    switch (state) {
+      case 'login':
+        document.title = 'Authorize';
+        break;
+      case 'main':
+        document.title = 'RS Lang';
+        section = this.main.draw();
+        break;
+      case 'learn':
+        document.title = 'Learn';
+        break;
+      case 'train':
+        document.title = 'Train';
+        break;
+      default:
+        break;
+    }
     const footer = this.footer.draw();
     document.body.appendChild(header);
     document.body.appendChild(section);

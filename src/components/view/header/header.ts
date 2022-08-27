@@ -11,6 +11,7 @@ class Header {
     this.pages.forEach((page) => {
       const link = document.createElement('a');
       link.textContent = page;
+      link.setAttribute('href', `#${page.toLowerCase()}`);
       nav.appendChild(link);
     });
     element.appendChild(nav);
