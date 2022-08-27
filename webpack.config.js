@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   entry: path.resolve(__dirname, './src/index.ts'),
@@ -20,6 +21,7 @@ const config = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
   ],
   module: {
     rules: [
@@ -33,8 +35,12 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      }
     ],
   },
   resolve: {

@@ -1,3 +1,4 @@
+import './header.scss';
 class Header {
   pages = ['Login', 'Main', 'Learn', 'Train'];
 
