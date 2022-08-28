@@ -13,7 +13,7 @@ class App {
   start() {
     switch (this.state) {
       case 'main':
-        this.view.draw();
+        // this.view.draw();
         break;
       default:
         break;

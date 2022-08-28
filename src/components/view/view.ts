@@ -22,14 +22,14 @@ class View {
     this.state = 'main';
   }
 
-  draw() {
-    const header = this.header.draw();
-    const section = this.main.draw();
-    const footer = this.footer.draw();
-    document.body.appendChild(header);
-    document.body.appendChild(section);
-    document.body.appendChild(footer);
-  }
+  // draw() {
+  //   const header = this.header.draw();
+  //   const section = this.main.draw();
+  //   const footer = this.footer.draw();
+  //   document.body.appendChild(header);
+  //   document.body.appendChild(section);
+  //   document.body.appendChild(footer);
+  // }
 }
 
 export default View;
