@@ -1,0 +1,86 @@
+.main {
+  align-items: flex-start !important;
+}
+
+.page-section__title {
+  text-align: center;
+  font-size: 4rem;
+  margin: 2rem 0;
+}
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  justify-content: center;
+
+  .benefits-list__item {
+    width: 40%;
+    font-size: 2rem;
+    padding: 3rem;
+  }
+  h4 {
+    font-size: 3rem;
+    background-color: red;
+  }
+  p {
+    padding: 1rem;
+  }
+}
+
+.wrap-iframe {
+  height: 315px;
+  width: 560px;
+  margin: 0 auto;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 30%;
+  font-size: 0;
+  .card-photo {
+    width: 230px;
+    height: 230px;
+    background-color: purple;
+  }
+  .card-name {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+  .card-desc {
+    line-height: 2.6rem;
+    margin: 1rem;
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 767px) {
+  .benefits-list {
+    flex-direction: column;
+  }
+  .benefits-list {
+    .benefits-list__item {
+      padding: 1rem;
+      width: 100%;
+    }
+    h4 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .benefits-list {
+    .benefits-list__item {
+      padding: 1rem;
+    }
+    h4 {
+      font-size: 2rem;
+    }
+  }
+}
