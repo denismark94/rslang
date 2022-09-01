@@ -1,6 +1,6 @@
 class LearnView {
-  constructor() {
-  }
+  // constructor() {
+  // }
 }
 
 export default LearnView;

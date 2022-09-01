@@ -1,9 +1,10 @@
+import './header.scss';
 class Header {
   pages = ['Login', 'Main', 'Learn', 'Train'];
 
-  constructor() {
+  // constructor() {
 
-  }
+  // }
 
   draw(): HTMLElement {
     const element = document.createElement('header');
