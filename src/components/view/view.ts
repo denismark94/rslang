@@ -22,14 +22,36 @@ class View {
     this.state = 'main';
   }
 
-  // draw() {
-  //   const header = this.header.draw();
-  //   const section = this.main.draw();
-  //   const footer = this.footer.draw();
-  //   document.body.appendChild(header);
-  //   document.body.appendChild(section);
-  //   document.body.appendChild(footer);
-  // }
+  draw(state: string) {
+    document.querySelectorAll('.main').forEach((section) => {
+      section.classList.add('hidden');
+    });
+    // document.body.innerHTML = '';
+    // const header = this.header.draw();
+    // let section = this.main.draw();
+    switch (state) {
+      case 'login':
+        document.title = 'Authorize';
+        break;
+      case 'main':
+        document.title = 'RS Lang';
+        // section = this.main.draw();
+        break;
+      case 'learn':
+        document.title = 'Learn';
+        break;
+      case 'train':
+        document.title = 'Train';
+        break;
+      default:
+        break;
+    }
+    document.getElementById(state)?.classList.remove('hidden');
+    // const footer = this.footer.draw();
+    // document.body.appendChild(header);
+    // document.body.appendChild(section);
+    // document.body.appendChild(footer);
+  }
 }
 
 export default View;
