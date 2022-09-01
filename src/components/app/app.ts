@@ -33,13 +33,35 @@ class App {
       password: 'password',
       id: '63092d553e8288001679d5e5',
       token:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDkyZDU1M2U4Mjg4MDAxNjc5ZDVlNSIsImlhdCI6MTY2MTU1NTAxOSwiZXhwIjoxNjYxNTY5NDE5fQ.bNe6ELh_G7GvUaYemhWmgkMJxPI8_61FY0qka_9OmUg',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDkyZDU1M2U4Mjg4MDAxNjc5ZDVlNSIsImlhdCI6MTY2MjA0NDA3NywiZXhwIjoxNjYyMDU4NDc3fQ.Rcm43ZZzrgULxj3bRpnUhYWuWdMzplyXH3fcLA3s_ls',
     };
-    const wid = '5e9f5ee35eb9e72bc21af4a2';
+    const word = {
+      id: '6310d6de45b4220016d69ec5',
+    };
+    const uword = {
+      difficulty: 'weak',
+      optional: {
+        learned: false,
+      },
+    };
+    const stat = {
+      learnedWords: '0',
+      optional: {},
+    };
+    const settings = {
+      wordsPerDay: '10',
+      optional: {},
+    };
     switch (command) {
       case 'page':
         this.model
           .getPage(2, 0)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'getword':
+        this.model
+          .getWord(word.id)
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;
@@ -57,6 +79,7 @@ class App {
           .then((data) => {
             user.token = <string>(<IUser>data).token;
             user.id = (<{ userId: string }>data).userId;
+            console.log(user.token);
           })
           .catch((err) => console.log(err));
         break;
@@ -74,33 +97,60 @@ class App {
       case 'getuserwords':
         this.model
           .getUserWords(user.id, user.token)
-          .then((data) => {
-            console.log(data);
-          })
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'createuserword':
+        this.model
+          .createUserWord(user.id, word.id, user.token, uword)
+          .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;
       case 'markdifficult':
+        uword.difficulty = 'strong';
         this.model
-          .createUserWords(user.id, wid, user.token, {
-            difficulty: 'strong',
-            optional: {},
-          })
-          .then((data) => {
-            console.log(data);
-          })
+          .updUserWord(user.id, word.id, user.token, uword)
+          .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;
       case 'marklearned':
+        uword.optional.learned = true;
         this.model
-          .createUserWords(user.id, wid, user.token, {
-            difficulty: 'weak',
-            optional: {
-              learned: true,
-            },
-          })
-          .then((data) => {
-            console.log(data);
-          })
+          .updUserWord(user.id, word.id, user.token, uword)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'getuserword':
+        this.model
+          .getUserWord(user.id, word.id, user.token)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'deluserword':
+        console.log(this.model.delUserWord(user.id, word.id, user.token));
+        break;
+      case 'getsettings':
+        this.model
+          .getSettings(user.id, user.token)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'updsettings':
+        this.model
+          .updSettings(user.id, user.token, settings)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'getstat':
+        this.model
+          .getStat(user.id, user.token)
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+        break;
+      case 'updstat':
+        this.model
+          .updStat(user.id, user.token, stat)
+          .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;
       default:

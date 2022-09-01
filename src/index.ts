@@ -3,5 +3,4 @@ import './global.css';
 
 const app: App = new App();
 app.start();
-app.testAPI('marklearned');
-app.testAPI('getuserwords');
+app.testAPI('page');
