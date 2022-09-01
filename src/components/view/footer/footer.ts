@@ -1,5 +1,5 @@
 class Footer {
-  draw() {
+  draw(): HTMLElement {
     const element = document.createElement('footer');
     const github = document.createElement('a');
     github.setAttribute('href', 'https://gihub.com/denismark94');

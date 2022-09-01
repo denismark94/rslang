@@ -14,16 +14,18 @@ class App {
   constructor() {
     this.view = new View();
     this.model = new Model();
+    window.onpopstate = () => this.route();
   }
 
   start() {
-    switch (this.state) {
-      case 'main':
-        this.view.draw();
-        break;
-      default:
-        break;
-    }
+    this.view.draw(this.state);
+  }
+
+  route() {
+    const link = window.location.hash.slice(1);
+    if (link === this.state) return;
+    this.state = link;
+    this.start();
   }
 
   testAPI(command: string) {
