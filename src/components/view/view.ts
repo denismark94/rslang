@@ -23,16 +23,19 @@ class View {
   }
 
   draw(state: string) {
-    document.body.innerHTML = '';
-    const header = this.header.draw();
-    let section = this.main.draw();
+    document.querySelectorAll('.main').forEach((section) => {
+      section.classList.add('hidden');
+    });
+    // document.body.innerHTML = '';
+    // const header = this.header.draw();
+    // let section = this.main.draw();
     switch (state) {
       case 'login':
         document.title = 'Authorize';
         break;
       case 'main':
         document.title = 'RS Lang';
-        section = this.main.draw();
+        // section = this.main.draw();
         break;
       case 'learn':
         document.title = 'Learn';
@@ -43,10 +46,11 @@ class View {
       default:
         break;
     }
-    const footer = this.footer.draw();
-    document.body.appendChild(header);
-    document.body.appendChild(section);
-    document.body.appendChild(footer);
+    document.getElementById(state)?.classList.remove('hidden');
+    // const footer = this.footer.draw();
+    // document.body.appendChild(header);
+    // document.body.appendChild(section);
+    // document.body.appendChild(footer);
   }
 }
 

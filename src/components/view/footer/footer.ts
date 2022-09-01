@@ -1,8 +1,8 @@
 class Footer {
-  draw() {
+  draw(): HTMLElement {
     const element = document.createElement('footer');
     const github = document.createElement('a');
-    github.setAttribute('href','https://gihub.com/denismark94');
+    github.setAttribute('href', 'https://gihub.com/denismark94');
     github.textContent = 'denismark94';
     const year = document.createElement('span');
     year.textContent = '2022';
