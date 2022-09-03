@@ -2,6 +2,7 @@
 import View from '../view/view';
 import Model from '../model/model';
 import IUser from '../model/iuser';
+import IWord from '../model/iword';
 class App {
   public view: View;
 
@@ -9,23 +10,36 @@ class App {
   //   public learnPage: LearnPage;
   //   public trainPage: TrainPage;
 
-  public state = 'main';
+  public state = 'textbook';
 
   constructor() {
-    this.view = new View();
     this.model = new Model();
-    window.onpopstate = () => this.route();
+    this.view = new View(this.model.baseURL);
+    window.onpopstate = (ev: Event) => this.route(ev);
   }
 
   start() {
     this.view.draw(this.state);
+    this.assignListeners();
+    this.changeCurrentPage();
   }
 
-  route() {
+  changeCurrentPage() {
+    this.view.learn.reassign_selectors();
+    this.model
+      .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
+      .then((data: IWord[]) => {
+        this.view.learn.draw_page(data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  route(ev: Event) {
+    ev.preventDefault();
     const link = window.location.hash.slice(1);
     if (link === this.state) return;
     this.state = link;
-    this.start();
+    this.view.draw(this.state);
   }
 
   testAPI(command: string) {
@@ -38,7 +52,7 @@ class App {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDkyZDU1M2U4Mjg4MDAxNjc5ZDVlNSIsImlhdCI6MTY2MjA0NDA3NywiZXhwIjoxNjYyMDU4NDc3fQ.Rcm43ZZzrgULxj3bRpnUhYWuWdMzplyXH3fcLA3s_ls',
     };
     const word = {
-      id: '6310d6de45b4220016d69ec5',
+      id: '5e9f5ee35eb9e72bc21af4a0',
     };
     const uword = {
       difficulty: 'weak',
@@ -57,7 +71,7 @@ class App {
     switch (command) {
       case 'page':
         this.model
-          .getPage(2, 0)
+          .getPage(0, 0)
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;
@@ -158,6 +172,31 @@ class App {
       default:
         break;
     }
+  }
+
+  assignListeners() {
+    const prev = <HTMLButtonElement>document.getElementById('pagprev');
+    const next = <HTMLButtonElement>document.getElementById('pagnext');
+    const chapterSelector = <HTMLSelectElement>(
+      document.getElementById('chapter_selector')
+    );
+    prev.addEventListener('click', () => {
+      if (this.view.learn.currentPage > 0) {
+        this.view.learn.currentPage -= 1;
+        this.changeCurrentPage();
+      }
+    });
+    next.addEventListener('click', () => {
+      if (this.view.learn.currentPage < 29) {
+        this.view.learn.currentPage += 1;
+        this.changeCurrentPage();
+      }
+    });
+    chapterSelector.addEventListener('change', (event) => {
+      const chapter = (<HTMLSelectElement>event.target).value;
+      this.view.learn.currentChapter = Number(chapter);
+      this.changeCurrentPage();
+    });
   }
 }
 

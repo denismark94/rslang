@@ -16,40 +16,40 @@
         </a>
         <div class="btn-nav"><span></span><span></span><span></span></div>
       </div>
-      <div class="nav">
+      <div class="nav wrapped">
         <ul class="nav-list-items">
           <li class="nav-item">
-            <a href="#">
+            <a href="#main">
               <p class="item-title">Главная</p>
               <div class="icon-home"></div>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="#textbook">
               <p class="item-title">Учебник</p>
               <div class="icon-book"></div>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="#dict">
               <p class="item-title">Словарь</p>
               <div class="icon-dictionary"></div>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="#games">
               <p class="item-title">Мини-игры</p>
               <div class="icon-game"></div>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="#stats">
               <p class="item-title">Статистика</p>
               <div class="icon-statistics"></div>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#">
+            <a href="#about">
               <p class="item-title">О команде</p>
               <div class="icon-team"></div>
             </a>
@@ -114,7 +114,7 @@
         </div>
       </div>
     </header>
-    <main class="main">
+    <main class="main" id="main">
       <div class="wrapper">
         <div class="main-container">
           <section class="page-section">
@@ -204,6 +204,22 @@
             </div>
           </section>
         </div>
+      </div>
+    </main>
+    <main class="main" id="textbook">
+      <div class="controls">
+        <select id="chapter_selector">
+          <option value="0">Раздел 1</option>
+          <option value="1">Раздел 2</option>
+          <option value="2">Раздел 3</option>
+          <option value="3">Раздел 4</option>
+          <option value="4">Раздел 5</option>
+          <option value="5">Раздел 6</option>
+        </select>
+        <div class="pagination">
+        </div>
+      </div>
+      <div class="words">
       </div>
     </main>
     <footer class="footer">

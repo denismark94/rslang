@@ -4,9 +4,9 @@ import './styles.scss';
 import './fan-animation.scss';
 import './login.scss';
 import './main-page.scss';
+import './textbook.scss';
 const app: App = new App();
 app.start();
-app.testAPI('page');
 
 // вкину 2 кнопки здесь, потом раскидаю по правильным местам
 
@@ -16,7 +16,7 @@ const slideNav = document.querySelector('.nav') as HTMLElement;
 
 btnHeader.addEventListener('click', (event: MouseEvent) => {
   if ((event.target as HTMLElement).closest('.btn-nav')) {
-    slideNav.classList.toggle('active');
+    slideNav.classList.toggle('wrapped');
   }
   if ((event.target as HTMLElement).closest('.btn-login')) {
     popupLogin.classList.toggle('active');

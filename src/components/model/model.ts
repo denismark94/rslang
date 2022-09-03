@@ -1,10 +1,10 @@
 import IUser from './iuser';
-import IUserWord from './iword';
+import IUserWord from './iuserword';
 import IStatistics from './istat';
 import ISettings from './isettings';
 
 class Model {
-  private baseURL = 'https://rslang-22-learnwords.herokuapp.com';
+  public baseURL = 'https://rslang-22-learnwords.herokuapp.com';
 
   getBook() {
     return fetch(this.baseURL + '/words').then((responce) => responce.json());
