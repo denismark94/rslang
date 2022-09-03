@@ -1,6 +1,7 @@
 class LearnView {
-  // constructor() {
-  // }
+  constructor() {
+    console.log('learn_constructor_stub');
+  }
 }
 
 export default LearnView;
