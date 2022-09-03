@@ -2,6 +2,7 @@
 import View from '../view/view';
 import Model from '../model/model';
 import IUser from '../model/iuser';
+import IWord from '../model/iword';
 class App {
   public view: View;
 
@@ -9,16 +10,22 @@ class App {
   //   public learnPage: LearnPage;
   //   public trainPage: TrainPage;
 
-  public state = 'main';
+  public state = 'textbook';
 
   constructor() {
-    this.view = new View();
     this.model = new Model();
+    this.view = new View(this.model.baseURL);
     window.onpopstate = () => this.route();
   }
 
   start() {
     this.view.draw(this.state);
+    this.model
+      .getPage(0, 0)
+      .then((data: IWord[]) => {
+        this.view.learn.draw_page(data);
+      })
+      .catch((err) => console.log(err));
   }
 
   route() {
@@ -38,7 +45,7 @@ class App {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDkyZDU1M2U4Mjg4MDAxNjc5ZDVlNSIsImlhdCI6MTY2MjA0NDA3NywiZXhwIjoxNjYyMDU4NDc3fQ.Rcm43ZZzrgULxj3bRpnUhYWuWdMzplyXH3fcLA3s_ls',
     };
     const word = {
-      id: '6310d6de45b4220016d69ec5',
+      id: '5e9f5ee35eb9e72bc21af4a0',
     };
     const uword = {
       difficulty: 'weak',
@@ -57,7 +64,7 @@ class App {
     switch (command) {
       case 'page':
         this.model
-          .getPage(2, 0)
+          .getPage(0, 0)
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
         break;

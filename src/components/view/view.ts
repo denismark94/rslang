@@ -1,12 +1,12 @@
 import Header from './header/header';
-import LearnSection from './learn/learn';
+import TextBookSection from './textbook/textbook';
 import MainSection from './main/main';
 import Footer from './footer/footer';
 
 class View {
   header: Header;
 
-  learn: LearnSection;
+  learn: TextBookSection;
 
   main: MainSection;
 
@@ -14,9 +14,9 @@ class View {
 
   footer: Footer;
 
-  constructor() {
+  constructor(url: string) {
     this.header = new Header();
-    this.learn = new LearnSection();
+    this.learn = new TextBookSection(url);
     this.main = new MainSection();
     this.footer = new Footer();
     this.state = 'main';
@@ -37,8 +37,8 @@ class View {
         document.title = 'RS Lang';
         // section = this.main.draw();
         break;
-      case 'learn':
-        document.title = 'Learn';
+      case 'textbook':
+        document.title = 'Textbook';
         break;
       case 'train':
         document.title = 'Train';
