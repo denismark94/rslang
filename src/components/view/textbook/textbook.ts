@@ -3,18 +3,66 @@ import IWord from '../../model/iword';
 class TextBookSection {
   baseURL: string;
 
+  currentChapter: number;
+
+  currentPage: number;
+
+  pagesPerChapter = 30;
+
   constructor(url: string) {
     this.baseURL = url;
-    console.log('textbook_constructor_stub');
+    this.currentChapter = 0;
+    this.currentPage = 1;
+    this.draw_selectors();
+    this.reassign_selectors();
   }
 
   draw_page(data: IWord[]) {
-    console.log(data);
     const wordWrapper = <HTMLDivElement>document.querySelector('.words');
     wordWrapper.innerHTML = '';
     data.forEach((wordContents) => {
       wordWrapper.appendChild(this.draw_word(wordContents));
     });
+  }
+
+  draw_selectors() {
+    const pageWrapper = <HTMLSelectElement>(
+      document.querySelector('.pagination')
+    );
+    pageWrapper.innerHTML = '';
+    const backBtn = document.createElement('button');
+    backBtn.id = 'pagprev';
+    backBtn.innerHTML =
+      '<svg viewBox="0 0 24 24"><path d="M14 7l-5 5 5 5V7z"></path></svg>';
+    pageWrapper.appendChild(backBtn);
+
+    const curBtn = document.createElement('button');
+    curBtn.id = 'pagcur';
+    curBtn.classList.add('active');
+    pageWrapper.appendChild(curBtn);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.id = 'pagnext';
+    nextBtn.innerHTML =
+      '<svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"></path></svg>';
+    pageWrapper.appendChild(nextBtn);
+  }
+
+  reassign_selectors() {
+    const prev = <HTMLButtonElement>document.getElementById('pagprev');
+    prev.disabled = false;
+    const cur = <HTMLButtonElement>document.getElementById('pagcur');
+    const next = <HTMLButtonElement>document.getElementById('pagnext');
+    next.disabled = false;
+    switch (this.currentPage) {
+      case 0:
+        prev.disabled = true;
+        break;
+      case 29:
+        next.disabled = true;
+        break;
+    }
+    cur.textContent = `Страница ${this.currentPage + 1}`;
   }
 
   draw_word(content: IWord): HTMLDivElement {

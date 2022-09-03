@@ -15,24 +15,31 @@ class App {
   constructor() {
     this.model = new Model();
     this.view = new View(this.model.baseURL);
-    window.onpopstate = () => this.route();
+    window.onpopstate = (ev: Event) => this.route(ev);
   }
 
   start() {
     this.view.draw(this.state);
+    this.assignListeners();
+    this.changeCurrentPage();
+  }
+
+  changeCurrentPage() {
+    this.view.learn.reassign_selectors();
     this.model
-      .getPage(0, 0)
+      .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
       .then((data: IWord[]) => {
         this.view.learn.draw_page(data);
       })
       .catch((err) => console.log(err));
   }
 
-  route() {
+  route(ev: Event) {
+    ev.preventDefault();
     const link = window.location.hash.slice(1);
     if (link === this.state) return;
     this.state = link;
-    this.start();
+    this.view.draw(this.state);
   }
 
   testAPI(command: string) {
@@ -165,6 +172,31 @@ class App {
       default:
         break;
     }
+  }
+
+  assignListeners() {
+    const prev = <HTMLButtonElement>document.getElementById('pagprev');
+    const next = <HTMLButtonElement>document.getElementById('pagnext');
+    const chapterSelector = <HTMLSelectElement>(
+      document.getElementById('chapter_selector')
+    );
+    prev.addEventListener('click', () => {
+      if (this.view.learn.currentPage > 0) {
+        this.view.learn.currentPage -= 1;
+        this.changeCurrentPage();
+      }
+    });
+    next.addEventListener('click', () => {
+      if (this.view.learn.currentPage < 29) {
+        this.view.learn.currentPage += 1;
+        this.changeCurrentPage();
+      }
+    });
+    chapterSelector.addEventListener('change', (event) => {
+      const chapter = (<HTMLSelectElement>event.target).value;
+      this.view.learn.currentChapter = Number(chapter);
+      this.changeCurrentPage();
+    });
   }
 }
 
