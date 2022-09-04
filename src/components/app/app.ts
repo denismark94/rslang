@@ -10,7 +10,7 @@ class App {
   //   public learnPage: LearnPage;
   //   public trainPage: TrainPage;
 
-  public state = 'textbook';
+  public state = 'games';
 
   constructor() {
     this.model = new Model();
@@ -25,11 +25,14 @@ class App {
   }
 
   changeCurrentPage() {
-    this.view.learn.reassign_selectors();
+    this.view.textbook.reassign_selectors();
     this.model
-      .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
+      .getPage(
+        this.view.textbook.currentPage,
+        this.view.textbook.currentChapter
+      )
       .then((data: IWord[]) => {
-        this.view.learn.draw_page(data);
+        this.view.textbook.draw_page(data);
       })
       .catch((err) => console.log(err));
   }
@@ -181,22 +184,49 @@ class App {
       document.getElementById('chapter_selector')
     );
     prev.addEventListener('click', () => {
-      if (this.view.learn.currentPage > 0) {
-        this.view.learn.currentPage -= 1;
+      if (this.view.textbook.currentPage > 0) {
+        this.view.textbook.currentPage -= 1;
         this.changeCurrentPage();
       }
     });
     next.addEventListener('click', () => {
-      if (this.view.learn.currentPage < 29) {
-        this.view.learn.currentPage += 1;
+      if (this.view.textbook.currentPage < 29) {
+        this.view.textbook.currentPage += 1;
         this.changeCurrentPage();
       }
     });
     chapterSelector.addEventListener('change', (event) => {
       const chapter = (<HTMLSelectElement>event.target).value;
-      this.view.learn.currentChapter = Number(chapter);
+      this.view.textbook.currentChapter = Number(chapter);
       this.changeCurrentPage();
     });
+
+    const sprintBtn = <HTMLButtonElement>document.getElementById('btn_sprint');
+    sprintBtn.addEventListener('click', () => {
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showSprint();
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const repeatSprintBtn = <HTMLButtonElement>(
+      document.getElementById('repeat_sprint')
+    );
+    repeatSprintBtn.addEventListener('click', () => this.view.showSprint());
+
+    const gamePicker = <HTMLButtonElement>(
+      document.getElementById('choose_game')
+    );
+    gamePicker.addEventListener('click', () => this.view.showPicker());
+
+    const yesbtn = <HTMLButtonElement>document.getElementById('btn_yes');
+    yesbtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const nobtn = <HTMLButtonElement>document.getElementById('btn_no');
+    nobtn.addEventListener('click', (event) => this.view.checkAnswer(event));
   }
 }
 

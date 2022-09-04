@@ -222,6 +222,46 @@
       <div class="words">
       </div>
     </main>
+    <main class="main" id="games">
+      <div class="games_picker">
+        <div class="sprint option">
+          <h2>Спринт</h2>
+          <p>Цель игры - определить, верно ли переведено слово. У вас есть 60 секунд.</p>
+          <p>Вы можете выбрать нужный ответ, кликнув по нему мышью или с помощью клавиш "влево" и "вправо" на клавиатуре</p>
+          <button id="btn_sprint">Начать</button>
+        </div>
+        <div class="audiochallenge option">
+          <h2>Аудиовызов</h2>
+          <p>Цель игры - выбрать верный перевод звучащего слова. У вас есть 60 секунд.</p>
+          <p>Вы можете выбрать нужный ответ, кликнув по нему мышью или с помощью цифровых клавиш от 1 до 5</p>
+          <p>Для повторного прослушивания нажмите на иконку динамика или нажмите Пробел</p>
+          <button id="btn_audiochallenge">Начать</button>
+        </div>
+      </div>
+      <div class="game hidden" id="sprint">
+        <div class="board">
+          <h2 id="sprint_title">Спринт</h2>
+          <div id="score"><h2>0</h2></div>
+          <div id="countdown"><h2>60</h2></div>
+          <div id="question">
+            <h3 class="word">Alcohol</h3>
+            <h3 class="translate">Приключение</h3>
+          </div>
+          <button id="btn_yes">Верно</button>
+          <button id="btn_no">Неверно</button>
+        </div>
+        <div class="results">
+          <h2>Игра окончена</h2>
+          <h3>Правильных ответов: <span id="correct_cnt">0</span></h3>
+          <h3>Неправильных ответов: <span id="incorrect_cnt">0</span></h3>
+          <h3>Счёт: <span id="score_cnt">0</span></h3>
+          <div class='btn_box'>
+            <button id="repeat_sprint">Повторить</button>
+            <button id="choose_game">Выбор игры</button>
+        </div>
+        </div>
+      </div>
+    </main>
     <footer class="footer">
       <div class="wrapper">
         <div class="footer-container">
