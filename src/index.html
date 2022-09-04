@@ -223,7 +223,7 @@
       </div>
     </main>
     <main class="main" id="games">
-      <div class="games_picker">
+      <div class="games_picker hidden">
         <div class="sprint option">
           <h2>Спринт</h2>
           <p>Цель игры - определить, верно ли переведено слово. У вас есть 60 секунд.</p>
@@ -259,6 +259,23 @@
             <button id="repeat_sprint">Повторить</button>
             <button id="choose_game">Выбор игры</button>
         </div>
+        </div>
+      </div>
+      <div class="game" id="audiochallenge">
+        <div id="progressbar"></div>
+        <button id="play_audio">
+          <svg class="icon_audio" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+        </button>
+        <div id="options">
+          <button id="opt_1">1</button>
+          <button id="opt_1">2</button>
+          <button id="opt_1">3</button>
+          <button id="opt_1">4</button>
+          <button id="opt_1">5</button>
+        </div>
+        <div id="other_options">
+          <button id="pass">Не знаю</button>
+          <button id="pass">Далее</button>
         </div>
       </div>
     </main>
