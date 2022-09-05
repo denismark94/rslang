@@ -105,7 +105,7 @@ class App {
           .getUser(user.id, user.token)
           .then((data) => {
             console.log(data);
-            user.name = (<IUser>data).name;
+            // user.name = (<IUser>data).name;
             user.email = (<IUser>data).email;
             user.password = <string>(<IUser>data).password;
           })
@@ -198,6 +198,50 @@ class App {
       this.view.learn.currentChapter = Number(chapter);
       this.changeCurrentPage();
     });
+    const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
+    const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
+    btnSign.addEventListener('click', () => {
+      this.register();
+    });
+
+    btnLogin.addEventListener('click', () => {
+      this.login();
+    });
+  }
+
+  login() {
+    const iconLogin = <HTMLButtonElement>document.querySelector('.btn-login');
+    const email = (<HTMLInputElement>document.querySelector('#login-email'))
+      .value;
+    const password = (<HTMLInputElement>(
+      document.querySelector('#login-password')
+    )).value;
+    const usernameTitle = <HTMLElement>document.querySelector('.name-login');
+
+    if (email == '') {
+      alert(' Требуется email.');
+      return;
+    }
+    if (password == '') {
+      alert('Требуется пароль.');
+      return;
+    }
+    const user = {
+      email: email,
+      password: password,
+    };
+    this.model
+      .login(user)
+      .then((data: IUser) => {
+        iconLogin.classList.add('active');
+        usernameTitle.innerHTML = <string>data.name;
+        alert(`${<string>data.name}  Добро пожаловать.`);
+        console.log(data.token);
+      })
+      .catch((err) => alert(err));
+    (<HTMLInputElement>document.querySelector('#login-email')).value = '';
+    (<HTMLInputElement>document.querySelector('#login-password')).value = '';
+    return;
   }
 
   register() {
@@ -307,13 +351,13 @@ class App {
       }
     }
 
-    btnSign.addEventListener('click', () => {
-      register();
-    });
+    // btnSign.addEventListener('click', () => {
+    //   register();
+    // });
 
-    btnLogin.addEventListener('click', () => {
-      login();
-    });
+    // btnLogin.addEventListener('click', () => {
+    //   login();
+    // });
 
     // if (localStorage.getItem('user') != null) localStorage.setItem('ыукаы', фыукаыфу);
     // if (localStorage.getItem('user') != null) {

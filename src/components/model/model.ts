@@ -50,7 +50,11 @@ class Model {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .catch((err) => {
+        throw err;
+      });
   }
 
   getUserWords(userId: string, token: string) {
