@@ -38,3 +38,25 @@
     background-color: #20b2aa;
   }
 }
+.wrap-select {
+  padding: 0.8rem 1rem;
+  background-color: #fff;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+  #chapter_selector {
+    color: #20b2aa;
+    height: 45px;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+
+    option {
+      height: 45px;
+    }
+  }
+}
