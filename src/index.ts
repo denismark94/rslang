@@ -1,7 +1,6 @@
 import App from './components/app/app';
 
 import './styles.scss';
-import './fan-animation.scss';
 import './login.scss';
 import './main-page.scss';
 import './textbook.scss';

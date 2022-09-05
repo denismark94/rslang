@@ -28,7 +28,7 @@ class TextBookSection {
   draw_selectors() {
     const ulTag = <HTMLUListElement>document.querySelector('.pag-list');
 
-    let totalPages = 29;
+    const totalPages = 29;
 
     let liTag = '';
     let activeLi;
@@ -37,13 +37,13 @@ class TextBookSection {
     let afterPage = this.currentPage + 1;
 
     if (this.currentPage > 1) {
-      liTag += `<li class="btn prev" ><span>‹Prev</span></li>`;
+      liTag += '<li class="btn prev" ><span>‹Prev</span></li>';
     }
 
     if (this.currentPage > 2) {
-      liTag += `<li class="numb"><span>1</span></li>`;
+      liTag += '<li class="numb"><span>1</span></li>';
       if (this.currentPage > 3) {
-        liTag += `<li class="dots"><span>...</span></li>`;
+        liTag += '<li class="dots"><span>...</span></li>';
       }
     }
 
@@ -78,13 +78,13 @@ class TextBookSection {
 
     if (this.currentPage < totalPages - 1) {
       if (this.currentPage < totalPages - 2) {
-        liTag += `<li class="dots"><span>...</span></li>`;
+        liTag += '<li class="dots"><span>...</span></li>';
       }
-      liTag += `<li class="numb"><span>${totalPages}</span></li>`;
+      liTag += '<li class="numb"><span>${totalPages}</span></li>';
     }
 
     if (this.currentPage < totalPages) {
-      liTag += `<li class="btn next"><span>Next›</span></li>`;
+      liTag += '<li class="btn next"><span>Next›</span></li>';
     }
     ulTag.innerHTML = liTag;
   }

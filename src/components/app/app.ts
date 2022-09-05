@@ -187,7 +187,7 @@ class App {
       });
     }
     if (nxt) {
-      nxt.addEventListener('click', (e) => {
+      nxt.addEventListener('click', () => {
         if (this.view.learn.currentPage < 29) {
           this.view.learn.currentPage += 1;
 
