@@ -10,11 +10,14 @@ class App {
   //   public learnPage: LearnPage;
   //   public trainPage: TrainPage;
 
-  public state = 'textbook';
+  public state = 'games';
+
+  public game: string;
 
   constructor() {
     this.model = new Model();
     this.view = new View(this.model.baseURL);
+    this.game = 'sprint';
     window.onpopstate = (ev: Event) => this.route(ev);
   }
 
@@ -28,9 +31,12 @@ class App {
     this.view.learn.draw_selectors();
     this.assignListeners();
     this.model
-      .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
+      .getPage(
+        this.view.textbook.currentPage,
+        this.view.textbook.currentChapter
+      )
       .then((data: IWord[]) => {
-        this.view.learn.draw_page(data);
+        this.view.textbook.draw_page(data);
       })
       .catch((err) => console.log(err));
   }
@@ -212,9 +218,73 @@ class App {
 
     chapterSelector.addEventListener('change', (event) => {
       const chapter = (<HTMLSelectElement>event.target).value;
-      this.view.learn.currentChapter = Number(chapter);
+      this.view.textbook.currentChapter = Number(chapter);
       this.changeCurrentPage();
     });
+
+    const sprintBtn = <HTMLButtonElement>document.getElementById('btn_sprint');
+    sprintBtn.addEventListener('click', () => {
+      this.game = 'sprint';
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showGame(this.game);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const audioBtn = <HTMLButtonElement>(
+      document.getElementById('btn_audiochallenge')
+    );
+    audioBtn.addEventListener('click', () => {
+      this.game = 'audiochallenge';
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showGame(this.game);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const repeatBtn = <HTMLButtonElement>(
+      document.getElementById('repeat_sprint')
+    );
+    repeatBtn.addEventListener('click', () => this.view.showGame(this.game));
+
+    const gamePicker = <HTMLButtonElement>(
+      document.getElementById('choose_game')
+    );
+    gamePicker.addEventListener('click', () => this.view.showPicker());
+
+    const yesbtn = <HTMLButtonElement>document.getElementById('btn_yes');
+    yesbtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const nobtn = <HTMLButtonElement>document.getElementById('btn_no');
+    nobtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const playAudioBtn = <HTMLButtonElement>(
+      document.getElementById('play_audio')
+    );
+    playAudioBtn.addEventListener('click', () => this.view.playAudio());
+
+    const nextQBtn = <HTMLButtonElement>(
+      document.getElementById('next_question')
+    );
+    nextQBtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const answerBtns = document.querySelectorAll('#options button');
+    answerBtns.forEach((btn) => {
+      btn.addEventListener('click', (event) => this.view.checkAnswer(event));
+    });
+
+    const showAnswerBtn = <HTMLButtonElement>(
+      document.getElementById('show_answer')
+    );
+    showAnswerBtn.addEventListener('click', (event) =>
+      this.view.checkAnswer(event)
+    );
   }
 }
 
