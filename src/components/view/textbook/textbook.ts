@@ -14,7 +14,7 @@ class TextBookSection {
     this.currentChapter = 0;
     this.currentPage = 1;
     this.draw_selectors();
-    this.reassign_selectors();
+    //this.reassign_selectors();
   }
 
   draw_page(data: IWord[]) {
@@ -26,44 +26,85 @@ class TextBookSection {
   }
 
   draw_selectors() {
-    const pageWrapper = <HTMLSelectElement>(
-      document.querySelector('.pagination')
-    );
-    pageWrapper.innerHTML = '';
-    const backBtn = document.createElement('button');
-    backBtn.id = 'pagprev';
-    backBtn.innerHTML =
-      '<svg viewBox="0 0 24 24"><path d="M14 7l-5 5 5 5V7z"></path></svg>';
-    pageWrapper.appendChild(backBtn);
+    const ulTag = <HTMLUListElement>document.querySelector('.pag-list');
 
-    const curBtn = document.createElement('button');
-    curBtn.id = 'pagcur';
-    curBtn.classList.add('active');
-    pageWrapper.appendChild(curBtn);
+    const totalPages = 29;
 
-    const nextBtn = document.createElement('button');
-    nextBtn.id = 'pagnext';
-    nextBtn.innerHTML =
-      '<svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"></path></svg>';
-    pageWrapper.appendChild(nextBtn);
-  }
+    let liTag = '';
+    let activeLi;
 
-  reassign_selectors() {
-    const prev = <HTMLButtonElement>document.getElementById('pagprev');
-    prev.disabled = false;
-    const cur = <HTMLButtonElement>document.getElementById('pagcur');
-    const next = <HTMLButtonElement>document.getElementById('pagnext');
-    next.disabled = false;
-    switch (this.currentPage) {
-      case 0:
-        prev.disabled = true;
-        break;
-      case 29:
-        next.disabled = true;
-        break;
+    let beforePage = this.currentPage - 1;
+    let afterPage = this.currentPage + 1;
+
+    if (this.currentPage > 1) {
+      liTag += '<li class="btn prev" ><span>‹Prev</span></li>';
     }
-    cur.textContent = `Страница ${this.currentPage + 1}`;
+
+    if (this.currentPage > 2) {
+      liTag += '<li class="numb"><span>1</span></li>';
+      if (this.currentPage > 3) {
+        liTag += '<li class="dots"><span>...</span></li>';
+      }
+    }
+
+    //как много страниц или li показывать перед текущим li
+    if (this.currentPage == totalPages) {
+      beforePage = beforePage - 2;
+    } else if (this.currentPage == totalPages - 1) {
+      beforePage = beforePage - 1;
+    }
+
+    //как много страниц или li показывать после текущего li
+    if (this.currentPage == 0) {
+      afterPage = afterPage + 2;
+    } else if (this.currentPage == 1) {
+      afterPage = afterPage + 1;
+    }
+
+    for (let pageLength = beforePage; pageLength <= afterPage; pageLength++) {
+      if (pageLength > totalPages) {
+        continue;
+      }
+      if (pageLength == -1) {
+        pageLength = pageLength + 1;
+      }
+      if (this.currentPage == pageLength) {
+        activeLi = 'active';
+      } else {
+        activeLi = '';
+      }
+      liTag += `<li class="numb ${activeLi}"><span>${pageLength}</span></li>`;
+    }
+
+    if (this.currentPage < totalPages - 1) {
+      if (this.currentPage < totalPages - 2) {
+        liTag += '<li class="dots"><span>...</span></li>';
+      }
+      liTag += `<li class="numb"><span>${totalPages}</span></li>`;
+    }
+
+    if (this.currentPage < totalPages) {
+      liTag += '<li class="btn next"><span>Next›</span></li>';
+    }
+    ulTag.innerHTML = liTag;
   }
+
+  // reassign_selectors() {
+  //   const prev = <HTMLButtonElement>document.getElementById('pagprev');
+  //   prev.disabled = false;
+  //   const cur = <HTMLButtonElement>document.getElementById('pagcur');
+  //   const next = <HTMLButtonElement>document.getElementById('pagnext');
+  //   next.disabled = false;
+  //   switch (this.currentPage) {
+  //     case 0:
+  //       prev.disabled = true;
+  //       break;
+  //     case 29:
+  //       next.disabled = true;
+  //       break;
+  //   }
+  //   cur.textContent = `Страница ${this.currentPage + 1}`;
+  // }
 
   draw_word(content: IWord): HTMLDivElement {
     const wordCard = document.createElement('div');
