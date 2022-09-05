@@ -5,6 +5,8 @@ import Footer from './footer/footer';
 import IWord from '../model/iword';
 
 class View {
+  url: string;
+
   header: Header;
 
   textbook: TextBookSection;
@@ -27,7 +29,10 @@ class View {
 
   translate: string;
 
+  progress: number;
+
   constructor(url: string) {
+    this.url = url;
     this.header = new Header();
     this.textbook = new TextBookSection(url);
     this.main = new MainSection();
@@ -39,6 +44,7 @@ class View {
     this.wordlist = [];
     this.currentWordIndex = 0;
     this.translate = '';
+    this.progress = 0;
   }
 
   draw(state: string) {
@@ -72,62 +78,82 @@ class View {
     // document.body.appendChild(footer);
   }
 
-  showPicker() {
-    const picker = <HTMLDivElement>document.querySelector('.games_picker');
-    picker.classList.remove('hidden');
-    const game = <HTMLDivElement>document.getElementById('sprint');
-    game.classList.add('hidden');
-  }
-
-  showSprint() {
+  hideElements() {
     const picker = <HTMLDivElement>document.querySelector('.games_picker');
     picker.classList.add('hidden');
-    const game = <HTMLDivElement>document.getElementById('sprint');
-    game.classList.remove('hidden');
+    const board = <HTMLDivElement>document.querySelector('.board');
+    board.classList.add('hidden');
     const results = <HTMLDivElement>document.querySelector('.results');
     results.classList.add('hidden');
-    this.showBoard();
+  }
+
+  hideGames() {
+    const sprint = <HTMLDivElement>document.getElementById('sprint');
+    sprint.classList.add('hidden');
+    const aChall = <HTMLDivElement>document.getElementById('audiochallenge');
+    aChall.classList.add('hidden');
+  }
+
+  showPicker() {
+    this.hideElements();
+    const picker = <HTMLDivElement>document.querySelector('.games_picker');
+    picker.classList.remove('hidden');
   }
 
   showBoard() {
+    this.hideElements();
     const board = <HTMLDivElement>document.querySelector('.board');
     board.classList.remove('hidden');
-    const results = <HTMLDivElement>document.querySelector('.results');
-    results.classList.add('hidden');
-    this.startGame();
   }
 
-  startGame() {
+  showGame(game: string) {
+    this.showBoard();
+    this.hideGames();
+    const sprint = <HTMLDivElement>document.getElementById(game);
+    sprint.classList.remove('hidden');
+    this.startGame(game);
+  }
+
+  startGame(game: string) {
     this.score = 0;
     this.cntCorrect = 0;
     this.cntIncorrect = 0;
+    this.progress = 1;
     this.genPair();
     this.refresh_values();
-    this.countdown();
+    switch (game) {
+      case 'sprint':
+        this.countdown();
+        break;
+      case 'audiochallenge':
+        this.playAudio();
+      default:
+        break;
+    }
+  }
+
+  showResults() {
+    this.hideElements();
+    const results = <HTMLDivElement>document.querySelector('.results');
+    results.classList.remove('hidden');
   }
 
   countdown() {
-    let counter = 59;
+    let counter = 3;
     const hr = <HTMLHRElement>document.querySelector('#countdown > h2');
     hr.textContent = '60';
     const timer = setInterval(
-      (showRes: () => void) => {
+      function (context: View) {
         if (counter >= 0) {
           hr.textContent = (counter--).toString();
         } else {
           clearInterval(timer);
-          showRes();
+          context.showResults();
         }
       },
       1000,
-      this.showResult);
-  }
-
-  showResult() {
-    const board = <HTMLDivElement>document.querySelector('.board');
-    board.classList.add('hidden');
-    const results = <HTMLDivElement>document.querySelector('.results');
-    results.classList.remove('hidden');
+      this
+    );
   }
 
   checkAnswer(event: Event) {
@@ -138,11 +164,24 @@ class View {
       case 'btn_yes':
         this.cntCorrect += answer ? 1 : 0;
         this.score += answer ? 10 : 0;
+        this.genPair();
+        this.refresh_values();
         break;
       case 'btn_no':
         this.cntIncorrect += !answer ? 1 : 0;
         this.score += !answer ? 10 : 0;
+        this.genPair();
+        this.refresh_values();
         break;
+      case 'next_question':
+        if (this.progress < 10) {
+          this.progress++;
+          this.genPair();
+          this.refresh_values();
+          this.playAudio();
+        } else {
+          this.showResults();
+        }
     }
     this.genPair();
     this.refresh_values();
@@ -171,6 +210,12 @@ class View {
       document.getElementById('incorrect_cnt')
     );
     incorrectContainer.textContent = this.cntIncorrect.toString();
+
+    const audio = <HTMLAudioElement>document.getElementById('example_audio');
+    audio.src = this.url + '/' + this.wordlist[this.currentWordIndex].audio;
+
+    const pb = <HTMLDivElement>document.getElementById('progressbar');
+    pb.setAttribute('width', `${this.progress * 10}%`);
   }
 
   genPair() {
@@ -185,6 +230,11 @@ class View {
 
   getRandInt(max: number) {
     return Math.floor(Math.random() * max);
+  }
+
+  playAudio() {
+    const audio = <HTMLAudioElement>document.getElementById('example_audio');
+    audio.play().catch((err) => console.log(err));
   }
 }
 

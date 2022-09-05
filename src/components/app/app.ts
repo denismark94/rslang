@@ -207,7 +207,20 @@ class App {
         .getBook()
         .then((data: IWord[]) => {
           this.view.wordlist = data;
-          this.view.showSprint();
+          this.view.showGame('sprint');
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const audioBtn = <HTMLButtonElement>(
+      document.getElementById('btn_audiochallenge')
+    );
+    audioBtn.addEventListener('click', () => {
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showGame('audiochallenge');
         })
         .catch((err) => console.log(err));
     });
@@ -215,7 +228,9 @@ class App {
     const repeatSprintBtn = <HTMLButtonElement>(
       document.getElementById('repeat_sprint')
     );
-    repeatSprintBtn.addEventListener('click', () => this.view.showSprint());
+    repeatSprintBtn.addEventListener('click', () =>
+      this.view.showGame('sprint')
+    );
 
     const gamePicker = <HTMLButtonElement>(
       document.getElementById('choose_game')
@@ -227,6 +242,16 @@ class App {
 
     const nobtn = <HTMLButtonElement>document.getElementById('btn_no');
     nobtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const playAudioBtn = <HTMLButtonElement>(
+      document.getElementById('play_audio')
+    );
+    playAudioBtn.addEventListener('click', () => this.view.playAudio());
+
+    const nextQBtn = <HTMLButtonElement>(
+      document.getElementById('next_question')
+    );
+    nextQBtn.addEventListener('click', (event) => this.view.checkAnswer(event));
   }
 }
 
