@@ -1,0 +1,40 @@
+.pag ul {
+  display: flex;
+  background-color: #fff;
+  padding: 0.8rem;
+  border-radius: 5rem;
+  li {
+    list-style: none; //может и не надо
+    color: #20b2aa;
+    line-height: 45px;
+    text-align: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  li.numb {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin: 0 3px;
+  }
+  li.dots {
+    font-size: 2.2rem;
+    cursor: default;
+  }
+  li.btn {
+    padding: 0 20px;
+  }
+  li.prev {
+    border-radius: 25px 5px 5px 25px;
+  }
+  li.next {
+    border-radius: 5px 25px 25px 5px;
+  }
+  li.active,
+  li.numb:hover,
+  li.btn:hover {
+    color: #fff;
+    background-color: #20b2aa;
+  }
+}
