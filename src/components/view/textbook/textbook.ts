@@ -80,7 +80,7 @@ class TextBookSection {
       if (this.currentPage < totalPages - 2) {
         liTag += '<li class="dots"><span>...</span></li>';
       }
-      liTag += '<li class="numb"><span>${totalPages}</span></li>';
+      liTag += `<li class="numb"><span>${totalPages}</span></li>`;
     }
 
     if (this.currentPage < totalPages) {
