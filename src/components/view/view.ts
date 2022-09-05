@@ -31,6 +31,8 @@ class View {
 
   progress: number;
 
+  options: string[];
+
   constructor(url: string) {
     this.url = url;
     this.header = new Header();
@@ -45,6 +47,7 @@ class View {
     this.currentWordIndex = 0;
     this.translate = '';
     this.progress = 0;
+    this.options = [];
   }
 
   draw(state: string) {
@@ -120,7 +123,7 @@ class View {
     this.cntIncorrect = 0;
     this.progress = 1;
     this.genPair();
-    this.refresh_values();
+    this.refreshValues();
     switch (game) {
       case 'sprint':
         this.countdown();
@@ -165,29 +168,28 @@ class View {
         this.cntCorrect += answer ? 1 : 0;
         this.score += answer ? 10 : 0;
         this.genPair();
-        this.refresh_values();
+        this.refreshValues();
         break;
       case 'btn_no':
         this.cntIncorrect += !answer ? 1 : 0;
         this.score += !answer ? 10 : 0;
         this.genPair();
-        this.refresh_values();
+        this.refreshValues();
         break;
       case 'next_question':
         if (this.progress < 10) {
           this.progress++;
           this.genPair();
-          this.refresh_values();
-          this.playAudio();
+          this.refreshValues();
         } else {
           this.showResults();
         }
     }
     this.genPair();
-    this.refresh_values();
+    this.refreshValues();
   }
 
-  refresh_values() {
+  refreshValues() {
     const wordContainer = <HTMLHRElement>(
       document.querySelector('#question .word')
     );
@@ -215,7 +217,14 @@ class View {
     audio.src = this.url + '/' + this.wordlist[this.currentWordIndex].audio;
 
     const pb = <HTMLDivElement>document.getElementById('progressbar');
-    pb.setAttribute('width', `${this.progress * 10}%`);
+    pb.style.width = `${this.progress * 10}%`;
+
+    const optBtns = document.querySelectorAll('#options button');
+    let i = 0;
+    optBtns.forEach((btn) => {
+      btn.textContent = `${i + 1}. ${this.options[i]}`;
+      i++;
+    });
   }
 
   genPair() {
@@ -226,6 +235,22 @@ class View {
       this.translate =
         this.wordlist[this.getRandInt(this.wordlist.length)].wordTranslate;
     }
+    this.options = [this.wordlist[this.currentWordIndex].word];
+    let option = '';
+    for (let i = 0; i < 5; i++) {
+      do {
+        option = this.wordlist[this.getRandInt(this.wordlist.length)].word;
+      } while (this.options.indexOf(option) > 0);
+      this.options.push(option);
+    }
+    let randIndex = 0;
+    do {
+      randIndex = this.getRandInt(5);
+    } while (randIndex === 0);
+    [this.options[0], this.options[randIndex]] = [
+      this.options[randIndex],
+      this.options[0],
+    ];
   }
 
   getRandInt(max: number) {
