@@ -33,6 +33,8 @@ class View {
 
   options: string[];
 
+  dataChanging: boolean;
+
   constructor(url: string) {
     this.url = url;
     this.header = new Header();
@@ -48,6 +50,7 @@ class View {
     this.translate = '';
     this.progress = 0;
     this.options = [];
+    this.dataChanging = false;
   }
 
   draw(state: string) {
@@ -142,9 +145,9 @@ class View {
   }
 
   countdown() {
-    let counter = 3;
+    let counter = 60;
     const hr = <HTMLHRElement>document.querySelector('#countdown > h2');
-    hr.textContent = '60';
+    hr.textContent = (counter--).toString();
     const timer = setInterval(
       function (context: View) {
         if (counter >= 0) {
@@ -159,10 +162,27 @@ class View {
     );
   }
 
+  clearAnswerButtons() {
+    const answerBtns = document.querySelectorAll('#options button');
+    answerBtns.forEach((btn) => {
+      btn.classList.remove('correct');
+      btn.classList.remove('incorrect');
+    });
+  }
+
+  paintButton(btn: HTMLButtonElement) {
+    if (btn.textContent?.includes(this.wordlist[this.currentWordIndex].word)) {
+      btn.classList.add('correct');
+    } else {
+      btn.classList.add('incorrect');
+    }
+  }
+
   checkAnswer(event: Event) {
     const answer =
       this.wordlist[this.currentWordIndex].wordTranslate === this.translate;
-    const btnType = (<HTMLButtonElement>event.target).id;
+    const btn = <HTMLButtonElement>event.target;
+    const btnType = btn.id;
     switch (btnType) {
       case 'btn_yes':
         this.cntCorrect += answer ? 1 : 0;
@@ -177,16 +197,36 @@ class View {
         this.refreshValues();
         break;
       case 'next_question':
+        this.clearAnswerButtons();
         if (this.progress < 10) {
           this.progress++;
           this.genPair();
-          this.refreshValues();
+          const promise = new Promise((resolve) => {
+            this.refreshValues();
+            resolve('ok');
+          });
+          promise.then(() => this.playAudio()).catch((err) => console.log(err));
         } else {
           this.showResults();
         }
+        break;
+      case 'show_answer':
+        const answerBtns = document.querySelectorAll('#options button');
+        answerBtns.forEach((button) =>
+          this.paintButton(<HTMLButtonElement>button)
+        );
+        break;
     }
-    this.genPair();
-    this.refreshValues();
+    if (btnType.includes('opt')) {
+      const correct = this.wordlist[this.currentWordIndex].word;
+      if (btn.textContent?.includes(correct)) {
+        this.score += 10;
+        this.cntCorrect++;
+      } else {
+        this.cntIncorrect++;
+      }
+      this.paintButton(btn);
+    }
   }
 
   refreshValues() {

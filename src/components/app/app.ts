@@ -12,9 +12,12 @@ class App {
 
   public state = 'games';
 
+  public game: string;
+
   constructor() {
     this.model = new Model();
     this.view = new View(this.model.baseURL);
+    this.game = 'sprint';
     window.onpopstate = (ev: Event) => this.route(ev);
   }
 
@@ -203,11 +206,12 @@ class App {
 
     const sprintBtn = <HTMLButtonElement>document.getElementById('btn_sprint');
     sprintBtn.addEventListener('click', () => {
+      this.game = 'sprint';
       this.model
         .getBook()
         .then((data: IWord[]) => {
           this.view.wordlist = data;
-          this.view.showGame('sprint');
+          this.view.showGame(this.game);
         })
         .catch((err) => console.log(err));
     });
@@ -216,21 +220,20 @@ class App {
       document.getElementById('btn_audiochallenge')
     );
     audioBtn.addEventListener('click', () => {
+      this.game = 'audiochallenge';
       this.model
         .getBook()
         .then((data: IWord[]) => {
           this.view.wordlist = data;
-          this.view.showGame('audiochallenge');
+          this.view.showGame(this.game);
         })
         .catch((err) => console.log(err));
     });
 
-    const repeatSprintBtn = <HTMLButtonElement>(
+    const repeatBtn = <HTMLButtonElement>(
       document.getElementById('repeat_sprint')
     );
-    repeatSprintBtn.addEventListener('click', () =>
-      this.view.showGame('sprint')
-    );
+    repeatBtn.addEventListener('click', () => this.view.showGame(this.game));
 
     const gamePicker = <HTMLButtonElement>(
       document.getElementById('choose_game')
@@ -252,6 +255,18 @@ class App {
       document.getElementById('next_question')
     );
     nextQBtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const answerBtns = document.querySelectorAll('#options button');
+    answerBtns.forEach((btn) => {
+      btn.addEventListener('click', (event) => this.view.checkAnswer(event));
+    });
+
+    const showAnswerBtn = <HTMLButtonElement>(
+      document.getElementById('show_answer')
+    );
+    showAnswerBtn.addEventListener('click', (event) =>
+      this.view.checkAnswer(event)
+    );
   }
 }
 
