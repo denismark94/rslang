@@ -25,7 +25,8 @@ class App {
   }
 
   changeCurrentPage() {
-    this.view.learn.reassign_selectors();
+    this.view.learn.draw_selectors();
+    this.assignListeners();
     this.model
       .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
       .then((data: IWord[]) => {
@@ -175,23 +176,40 @@ class App {
   }
 
   assignListeners() {
-    const prev = <HTMLButtonElement>document.getElementById('pagprev');
-    const next = <HTMLButtonElement>document.getElementById('pagnext');
+    const prv = <HTMLLIElement>document.querySelector('.prev');
+    const nxt = <HTMLLIElement>document.querySelector('.next');
+    const pageNumbers = <NodeList>document.querySelectorAll('.numb');
+    console.log(pageNumbers);
+    for (let i = 0; i < pageNumbers.length; i += 1) {
+      pageNumbers[i].addEventListener('click', () => {
+        this.view.learn.currentPage = Number(pageNumbers[i].textContent);
+        this.changeCurrentPage();
+      });
+    }
+    if (nxt) {
+      nxt.addEventListener('click', (e) => {
+        if (this.view.learn.currentPage < 29) {
+          this.view.learn.currentPage += 1;
+
+          this.changeCurrentPage();
+        }
+      });
+    }
+
+    if (prv) {
+      prv.addEventListener('click', () => {
+        if (this.view.learn.currentPage > 0) {
+          this.view.learn.currentPage -= 1;
+
+          this.changeCurrentPage();
+        }
+      });
+    }
+
     const chapterSelector = <HTMLSelectElement>(
       document.getElementById('chapter_selector')
     );
-    prev.addEventListener('click', () => {
-      if (this.view.learn.currentPage > 0) {
-        this.view.learn.currentPage -= 1;
-        this.changeCurrentPage();
-      }
-    });
-    next.addEventListener('click', () => {
-      if (this.view.learn.currentPage < 29) {
-        this.view.learn.currentPage += 1;
-        this.changeCurrentPage();
-      }
-    });
+
     chapterSelector.addEventListener('change', (event) => {
       const chapter = (<HTMLSelectElement>event.target).value;
       this.view.learn.currentChapter = Number(chapter);
