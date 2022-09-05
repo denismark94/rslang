@@ -1,237 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RS Lang</title>
-  </head>
 
-  <body class="body">
-    <header class="header">
-      <div class="header-container">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RS Lang</title>
+</head>
+
+<body class="body">
+  <header class="header">
+    <div class="header-container">
+      <div class="container-icon-login">
         <div class="btn-login"></div>
-        <a href="" class="btn-home">
-          <h2 class="title">RS Lang</h2>
-        </a>
-        <div class="btn-nav"><span></span><span></span><span></span></div>
+        <p class="name-login"></p>
       </div>
-      <div class="nav wrapped">
-        <ul class="nav-list-items">
-          <li class="nav-item">
-            <a href="#main">
-              <p class="item-title">Главная</p>
-              <div class="icon-home"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#textbook">
-              <p class="item-title">Учебник</p>
-              <div class="icon-book"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#dict">
-              <p class="item-title">Словарь</p>
-              <div class="icon-dictionary"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#games">
-              <p class="item-title">Мини-игры</p>
-              <div class="icon-game"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#stats">
-              <p class="item-title">Статистика</p>
-              <div class="icon-statistics"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#about">
-              <p class="item-title">О команде</p>
-              <div class="icon-team"></div>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="popup-login">
-        <div class="popup-main">
-          <input type="checkbox" id="chk" aria-hidden="true" />
-          <div class="signup">
-            <form>
-              <label for="chk" aria-hidden="true" class="label-login"
-                >Sign up</label
-              >
-              <input
-                type="text"
-                name="txt"
-                placeholder="User name"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="password"
-                name="pswd"
-                placeholder="Password"
-                required=""
-                class="input-login"
-              />
-              <button class="btn-login-form">Sign up</button>
-            </form>
-          </div>
+      <a href="" class="btn-home">
+        <h2 class="title">RS Lang</h2>
+      </a>
+      <div class="btn-nav"><span></span><span></span><span></span></div>
+    </div>
+    <div class="nav wrapped">
+      <ul class="nav-list-items">
+        <li class="nav-item">
+          <a href="#main">
+            <p class="item-title">Главная</p>
+            <div class="icon-home"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#textbook">
+            <p class="item-title">Учебник</p>
+            <div class="icon-book"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#dict">
+            <p class="item-title">Словарь</p>
+            <div class="icon-dictionary"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#games">
+            <p class="item-title">Мини-игры</p>
+            <div class="icon-game"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#stats">
+            <p class="item-title">Статистика</p>
+            <div class="icon-statistics"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#about">
+            <p class="item-title">О команде</p>
+            <div class="icon-team"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="popup-login">
+      <div class="popup-main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+        <div class="signup">
+          <form>
+            <label for="chk" aria-hidden="true" class="label-login">Sign up</label>
+            <input id="sign-name" type="text" name="txt" placeholder="User name" required="" class="input-login" />
+            <input id="sign-email" type="email" name="email" placeholder="Email" required="" class="input-login" />
+            <input id="sign-password" type="password" name="pswd" placeholder="Password" required=""
+              class="input-login" />
+            <button id="btn-sign" class="btn-login-form">Sign up</button>
+          </form>
+        </div>
 
-          <div class="login">
-            <form>
-              <label for="chk" aria-hidden="true" class="label-login"
-                >Login</label
-              >
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="password"
-                name="pswd"
-                placeholder="Password"
-                required=""
-                class="input-login"
-              />
-              <button class="btn-login-form">Login</button>
-            </form>
+        <div class="login">
+          <form>
+            <label for="chk" aria-hidden="true" class="label-login">Login</label>
+            <input id="login-email" type="email" name="email" placeholder="Email" required="" class="input-login" />
+            <input id="login-password" type="password" name="pswd" placeholder="Password" required=""
+              class="input-login" />
+            <button id="btn-login" class="btn-login-form">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="main" id="main">
+    <div class="wrapper">
+      <div class="main-container">
+        <section class="page-section">
+          <h3 class="page-section__title">Наши преимущества</h3>
+          <div class="benefits-list">
+            <div class="benefits-list__item">
+              <h4>Учебник</h4>
+              <p>
+                Учебник состоит из шести разделов, в каждом разделе 30
+                страниц, на каждой странице 20 слов для изучения
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Словарь</h4>
+              <p>
+                Авторизованные пользователи могут сохранять сложные слова в
+                словарь
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Игры</h4>
+              <p>
+                Обучение в игре, тренировки сделаны так, что их интересно
+                проходить
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Статистика</h4>
+              <p>
+                На странице статистики отображается краткосрочная статистика
+                по мини-играм и по словам за каждый день изучения
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
-    </header>
-    <main class="main" id="main">
-      <div class="wrapper">
-        <div class="main-container">
-          <section class="page-section">
-            <h3 class="page-section__title">Наши преимущества</h3>
-            <div class="benefits-list">
-              <div class="benefits-list__item">
-                <h4>Учебник</h4>
-                <p>
-                  Учебник состоит из шести разделов, в каждом разделе 30
-                  страниц, на каждой странице 20 слов для изучения
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Словарь</h4>
-                <p>
-                  Авторизованные пользователи могут сохранять сложные слова в
-                  словарь
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Игры</h4>
-                <p>
-                  Обучение в игре, тренировки сделаны так, что их интересно
-                  проходить
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Статистика</h4>
-                <p>
-                  На странице статистики отображается краткосрочная статистика
-                  по мини-играм и по словам за каждый день изучения
-                </p>
-              </div>
+        </section>
+        <section class="page-section">
+          <h3 class="page-section__title">
+            Возможности приложения(Здесь нехилый видеообзор)
+          </h3>
+          <div>
+            <div class="wrap-iframe">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CwRvM2TfYbs"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
             </div>
-          </section>
-          <section class="page-section">
-            <h3 class="page-section__title">
-              Возможности приложения(Здесь нехилый видеообзор)
-            </h3>
-            <div>
-              <div class="wrap-iframe">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/CwRvM2TfYbs"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
+          </div>
+        </section>
+        <section class="page-section">
+          <h3 class="page-section__title">О команде</h3>
+          <div class="team-list">
+            <div class="card">
+              <div class="card-photo">Фоточка</div>
+              <p class="card-name">Денис</p>
+              <p class="card-desc">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Voluptatem vero minima impedit fugit eaque quia veniam rem,
+                perspiciatis earum unde aperiam illo nobis cupiditate a qui
+                nisi sequi aliquam necessitatibus?
+              </p>
             </div>
-          </section>
-          <section class="page-section">
-            <h3 class="page-section__title">О команде</h3>
-            <div class="team-list">
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Денис</p>
-                <p class="card-desc">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptatem vero minima impedit fugit eaque quia veniam rem,
-                  perspiciatis earum unde aperiam illo nobis cupiditate a qui
-                  nisi sequi aliquam necessitatibus?
-                </p>
-              </div>
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Александр</p>
-                <p class="card-desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                  aliquam modi doloremque animi ipsa hic natus incidunt, earum
-                  nesciunt dolorum ratione officiis eos nihil sunt, provident
-                  dignissimos consequatur repellat. Impedit!
-                </p>
-              </div>
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Евгений</p>
-                <p class="card-desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium odit quas eos, laboriosam quasi esse ad adipisci
-                  ducimus non error minus repellendus debitis expedita fuga
-                  totam, numquam molestias ut commodi.
-                </p>
-              </div>
+            <div class="card">
+              <div class="card-photo">Фоточка</div>
+              <p class="card-name">Александр</p>
+              <p class="card-desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+                aliquam modi doloremque animi ipsa hic natus incidunt, earum
+                nesciunt dolorum ratione officiis eos nihil sunt, provident
+                dignissimos consequatur repellat. Impedit!
+              </p>
             </div>
-          </section>
-        </div>
+            <div class="card">
+              <div class="card-photo">Фоточка</div>
+              <p class="card-name">Евгений</p>
+              <p class="card-desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Praesentium odit quas eos, laboriosam quasi esse ad adipisci
+                ducimus non error minus repellendus debitis expedita fuga
+                totam, numquam molestias ut commodi.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
-    </main>
-    <main class="main" id="textbook">
-      <div class="controls">
-        <select id="chapter_selector">
-          <option value="0">Раздел 1</option>
-          <option value="1">Раздел 2</option>
-          <option value="2">Раздел 3</option>
-          <option value="3">Раздел 4</option>
-          <option value="4">Раздел 5</option>
-          <option value="5">Раздел 6</option>
-        </select>
-        <div class="pagination">
-        </div>
+    </div>
+  </main>
+  <main class="main" id="textbook">
+    <div class="controls">
+      <select id="chapter_selector">
+        <option value="0">Раздел 1</option>
+        <option value="1">Раздел 2</option>
+        <option value="2">Раздел 3</option>
+        <option value="3">Раздел 4</option>
+        <option value="4">Раздел 5</option>
+        <option value="5">Раздел 6</option>
+      </select>
+      <div class="pagination">
       </div>
-      <div class="words">
+    </div>
+    <div class="words">
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-container">
+        <a href="https://app.rs.school" class="rs-logo"></a>
+        <a href="#" class="author">Денис</a>
+        <a href="https://github.com/hell-llex" class="author">Александр</a>
+        <a href="#" class="author">Евгений</a>
+        <p class="date">2022</p>
       </div>
-    </main>
-    <footer class="footer">
-      <div class="wrapper">
-        <div class="footer-container">
-          <a href="https://app.rs.school" class="rs-logo"></a>
-          <a href="#" class="author">Денис</a>
-          <a href="https://github.com/hell-llex" class="author">Александр</a>
-          <a href="#" class="author">Евгений</a>
-          <p class="date">2022</p>
-        </div>
-      </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+</body>
+
 </html>
