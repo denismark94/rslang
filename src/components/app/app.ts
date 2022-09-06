@@ -22,7 +22,9 @@ class App {
     this.view.draw(this.state);
     this.assignListeners();
     this.changeCurrentPage();
-    this.register();
+    if (!localStorage.getItem('user')) {
+      alert('Hello');
+    }
   }
 
   changeCurrentPage() {
@@ -200,6 +202,7 @@ class App {
     });
     const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
     const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
+
     btnSign.addEventListener('click', () => {
       this.register();
     });
@@ -218,12 +221,8 @@ class App {
     )).value;
     const usernameTitle = <HTMLElement>document.querySelector('.name-login');
 
-    if (email == '') {
-      alert(' Требуется email.');
-      return;
-    }
-    if (password == '') {
-      alert('Требуется пароль.');
+    if (email == '' || password == '') {
+      alert(' Требуется email или пароль.');
       return;
     }
     const user = {
@@ -236,120 +235,115 @@ class App {
         iconLogin.classList.add('active');
         usernameTitle.innerHTML = <string>data.name;
         alert(`${<string>data.name}  Добро пожаловать.`);
-        console.log(data.token);
+        console.log(data.token, data.id);
+        localStorage.setItem('user', <string>data.id);
       })
       .catch((err) => alert(err));
+
     (<HTMLInputElement>document.querySelector('#login-email')).value = '';
     (<HTMLInputElement>document.querySelector('#login-password')).value = '';
     return;
   }
+  // -------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------
 
   register() {
-    const user = {
-      name: '',
-      email: '',
-      password: '',
-      id: '',
-      token: '',
-    };
+    // const usernameArray: string[] = [];
+    // const emailArray: string[] = [];
+    // const passwordArray: string[] = [];
 
-    const usernameArray: string[] = [];
-    const emailArray: string[] = [];
-    const passwordArray: string[] = [];
-    const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
-    const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
-    const iconLogin = <HTMLButtonElement>document.querySelector('.btn-login');
+    // const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
+    // const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
+    // const iconLogin = <HTMLButtonElement>document.querySelector('.btn-login');
+
+    // (<HTMLInputElement>document.querySelector('#sign-name')).value = '';
+    // (<HTMLInputElement>document.querySelector('#sign-email')).value = '';
+    // (<HTMLInputElement>document.querySelector('#sign-password')).value = '';
+    // (<HTMLInputElement>document.querySelector('#login-email')).value = '';
+    // (<HTMLInputElement>document.querySelector('#login-password')).value = '';
+
+    const username = (<HTMLInputElement>document.querySelector('#sign-name'))
+      .value;
+    const email = (<HTMLInputElement>document.querySelector('#sign-email'))
+      .value;
+    const password = (<HTMLInputElement>(
+      document.querySelector('#sign-password')
+    )).value;
+
+    // this.model
+    // .login(user)
+    // .then((data: IUser) => {
+    //   iconLogin.classList.add('active');
+    //   usernameTitle.innerHTML = <string>data.name;
+    //   alert(`${<string>data.name}  Добро пожаловать.`);
+    //   console.log(data.token);
+    // })
+    // .catch((err) => alert(err));
+
+    if (email.length == 0 || password.length == 0 || username.length == 0) {
+      alert(' Требуется ввести все данные.');
+      // return;
+    } else if (password.length <= 3) {
+      alert('Требуется ввести корректный пароль не менее 8 символов.');
+      // return;
+    } else {
+      const user = {
+        name: username,
+        email: email,
+        password: password,
+        // id: '',
+      };
+
+      this.model
+        .createUser(user)
+        .then((data: IUser) => {
+          // user.id = <string>data.id;
+          console.log(data);
+          alert(`${username} все хорошо.`);
+          console.log(user);
+        })
+        .catch(() => alert(`${username} уже зарегистрирован.`));
+    }
 
     (<HTMLInputElement>document.querySelector('#sign-name')).value = '';
     (<HTMLInputElement>document.querySelector('#sign-email')).value = '';
     (<HTMLInputElement>document.querySelector('#sign-password')).value = '';
-    (<HTMLInputElement>document.querySelector('#login-email')).value = '';
-    (<HTMLInputElement>document.querySelector('#login-password')).value = '';
 
-    // -------------------------------------------------------------------------------------------
+    // function login() {
+    //   const email = (<HTMLInputElement>document.querySelector('#login-email'))
+    //     .value;
+    //   const password = (<HTMLInputElement>(
+    //     document.querySelector('#login-password')
+    //   )).value;
+    //   const usernameTitle = <HTMLElement>document.querySelector('.name-login');
 
-    function register() {
-      const username = (<HTMLInputElement>document.querySelector('#sign-name'))
-        .value;
-      const email = (<HTMLInputElement>document.querySelector('#sign-email'))
-        .value;
-      const password = (<HTMLInputElement>(
-        document.querySelector('#sign-password')
-      )).value;
+    //   const i = emailArray.indexOf(email);
 
-      if (email == '') {
-        alert(' Требуется email.');
-        return;
-      } else if (password == '' || password.length <= 3) {
-        alert('Требуется пароль.');
-        return;
-      } else if (username == '') {
-        alert('Требуется имя.');
-        return;
-      } else if (emailArray.indexOf(email) == -1) {
-        usernameArray.push(username);
-        emailArray.push(email);
-        passwordArray.push(password);
+    //   if (emailArray.indexOf(email) == -1) {
+    //     if (email == '') {
+    //       alert(' Требуется email.');
+    //       return;
+    //     }
+    //     alert('Email не существует.');
+    //     return;
+    //   } else if (passwordArray[i] != password) {
+    //     if (password == '') {
+    //       alert('Требуется пароль.');
+    //       return;
+    //     }
+    //     alert('Password не существует.');
+    //     return;
+    //   } else {
+    //     iconLogin.classList.add('active');
+    //     usernameTitle.innerHTML = usernameArray[i];
+    //     alert(`${usernameArray[i]}  Добро пожаловать.`);
 
-        user.name = username;
-        user.email = email;
-        user.password = password;
-
-        // model
-        //   .createUser(user)
-        //   .then((data) => {
-        //     user.id = <string>(<IUser>data).id;
-        //   })
-        //   .catch((err) => console.log(err));
-
-        console.log(username, email, password, user);
-
-        alert(`${username}  Спасибо за регистрацию.`);
-
-        (<HTMLInputElement>document.querySelector('#sign-name')).value = '';
-        (<HTMLInputElement>document.querySelector('#sign-email')).value = '';
-        (<HTMLInputElement>document.querySelector('#sign-password')).value = '';
-      } else {
-        alert(`${email} уже зарегистрирован.`);
-        return;
-      }
-    }
-
-    function login() {
-      const email = (<HTMLInputElement>document.querySelector('#login-email'))
-        .value;
-      const password = (<HTMLInputElement>(
-        document.querySelector('#login-password')
-      )).value;
-      const usernameTitle = <HTMLElement>document.querySelector('.name-login');
-
-      const i = emailArray.indexOf(email);
-
-      if (emailArray.indexOf(email) == -1) {
-        if (email == '') {
-          alert(' Требуется email.');
-          return;
-        }
-        alert('Email не существует.');
-        return;
-      } else if (passwordArray[i] != password) {
-        if (password == '') {
-          alert('Требуется пароль.');
-          return;
-        }
-        alert('Password не существует.');
-        return;
-      } else {
-        iconLogin.classList.add('active');
-        usernameTitle.innerHTML = usernameArray[i];
-        alert(`${usernameArray[i]}  Добро пожаловать.`);
-
-        (<HTMLInputElement>document.querySelector('#login-email')).value = '';
-        (<HTMLInputElement>document.querySelector('#login-password')).value =
-          '';
-        return;
-      }
-    }
+    //     (<HTMLInputElement>document.querySelector('#login-email')).value = '';
+    //     (<HTMLInputElement>document.querySelector('#login-password')).value =
+    //       '';
+    //     return;
+    //   }
+    // }
 
     // btnSign.addEventListener('click', () => {
     //   register();
@@ -365,8 +359,6 @@ class App {
     // } else {
     //   localStorage.setItem(`user${usernameArray}`, JSON.stringify(user));
     // }
-
-    // Model.createUser(user);
   }
 }
 
