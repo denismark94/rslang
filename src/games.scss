@@ -1,0 +1,155 @@
+#games {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+
+  button {
+    width: 10em;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 1em;
+  }
+
+  button:hover {
+    cursor: pointer;
+    border: 2px solid black;
+  }
+
+  .games_picker {
+    display: flex;
+    gap: 10em;
+
+    .option {
+      width: 30vw;
+      height: 300px;
+      background-color: lightgray;
+      border-radius: 1em;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+  
+      *{
+        text-align: center;
+      }
+
+    }
+
+  }
+
+  .board {
+
+    #sprint {
+      width: 50vw;
+      background-color: lightgray;
+      border-radius: 1em;
+      padding: 1em;
+      display: grid;
+      grid-template-areas:  'title title'
+                            'score countdown'
+                            'question question'
+                            'btn_yes btn_no';
+      align-items: center;
+      justify-items: center;
+      gap: 1em;
+      
+      #sprint_title {
+        grid-area: title;
+      }
+
+      #score {
+        grid-area: score;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #countdown {
+        grid-area: countdown;
+        width: 100px;
+        height: 100px;
+        background-color: white;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #question {
+        border-radius: 1em;
+        grid-area: question;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+
+        h3 {
+          margin: 2em;
+        }
+      }
+
+      #btn_yes {
+        grid-area: btn_yes;
+        background-color: green;
+      }
+
+      #btn_no {
+        grid-area: btn_no;
+        background-color: red;
+      }
+    }
+
+    #audiochallenge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: lightgray;
+      padding: 1em;
+      border-radius: 1em;
+      gap: 2em;
+    
+      #progressbar {
+        width: 100%;
+        height: 10px;
+        background-color: mintcream;
+        border-radius: 5px;
+        align-self: flex-start;
+  
+      }
+    
+      #play_audio {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        padding: 10px;
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+      }
+
+      #options 
+        .correct {
+          background-color: green;
+        }
+
+        .incorrect {
+          background-color: red;
+        }
+      }
+
+  }
+
+  .results {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    button {
+      height: 50px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+  }
+}

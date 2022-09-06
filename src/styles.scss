@@ -14,6 +14,7 @@ body {
   overflow-x: hidden;
   font-family: 'Roboto Mono', monospace;
   font-style: normal;
+  font-size: 1.6rem;
   background-color: rgb(32, 32, 32);
   text-decoration: none;
   &.active {
@@ -269,4 +270,3 @@ a {
     background-image: url('https://app.rs.school/static/images/logo-rsschool3.png');
   }
 }
-

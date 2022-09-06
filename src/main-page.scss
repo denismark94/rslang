@@ -1,5 +1,6 @@
 .main {
-  align-items: flex-start !important;
+  // align-items: flex-start !important; Зачем? нужно ли important?
+  align-items: flex-start;
 }
 
 .page-section__title {
@@ -84,9 +85,6 @@
     }
   }
 }
-
-
-
 .hidden {
-  display: none;
+  display: none !important;
 }
