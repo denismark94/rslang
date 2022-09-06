@@ -10,7 +10,7 @@ class App {
   //   public learnPage: LearnPage;
   //   public trainPage: TrainPage;
 
-  public state = 'games';
+  public state = 'main';
 
   public game: string;
 
@@ -37,7 +37,7 @@ class App {
       (<HTMLElement>document.querySelector('.name-login')).innerHTML =
         this.name;
       (<HTMLButtonElement>document.querySelector('.btn-login')).classList.add(
-        'active'
+        'active',
       );
     }
   }
@@ -48,7 +48,7 @@ class App {
     this.model
       .getPage(
         this.view.textbook.currentPage,
-        this.view.textbook.currentChapter
+        this.view.textbook.currentChapter,
       )
       .then((data: IWord[]) => {
         this.view.textbook.draw_page(data);
@@ -309,7 +309,7 @@ class App {
       document.getElementById('show_answer')
     );
     showAnswerBtn.addEventListener('click', (event) =>
-      this.view.checkAnswer(event)
+      this.view.checkAnswer(event),
     );
 
     const btnHeader = <HTMLElement>document.querySelector('.header');
@@ -327,6 +327,9 @@ class App {
     btnHeader.addEventListener('click', (event: MouseEvent) => {
       if ((event.target as HTMLElement).closest('.btn-nav')) {
         slideNav.classList.toggle('wrapped');
+        (<HTMLElement>document.querySelector('.btn-nav')).classList.toggle(
+          'active'
+        );
       }
       if ((event.target as HTMLElement).closest('.btn-login')) {
         if (iconLogin.classList.contains('active')) {
@@ -380,7 +383,7 @@ class App {
           document.querySelector('.popup-login') as HTMLElement
         ).classList.remove('active');
         (document.querySelector('.body') as HTMLElement).classList.remove(
-          'active',
+          'active'
         );
       })
       .catch((err) => alert(err));

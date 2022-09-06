@@ -15,7 +15,8 @@ body {
   font-family: 'Roboto Mono', monospace;
   font-style: normal;
   font-size: 1.6rem;
-  background-color: rgb(32, 32, 32);
+  // background-color: rgb(99, 99, 99);
+  background: linear-gradient(to bottom,#4c4cd6, #433b97, #100d29);
   text-decoration: none;
   &.active {
     overflow: hidden;
@@ -37,7 +38,7 @@ a {
 
 .header {
   position: relative;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   justify-content: center;
 }
@@ -51,11 +52,11 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: chartreuse;
+  background-color:#26e6c6;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   z-index: 9;
   .title {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     line-height: 100%;
   }
@@ -64,23 +65,26 @@ a {
 .btn-nav,
 .btn-login {
   position: relative;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
+  padding: 2px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  gap: 5px;
-  background-color: green;
+  gap: 4px;
+  // background-color: rgb(53, 77, 53);
+  border: 2px solid black;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
   span {
     position: absolute;
     width: 2.6rem;
-    height: 5px;
+    height: 4px;
     background-color: black;
-    border-radius: 30px;
+    border-radius: 20px;
   }
 
   :nth-child(1) {
@@ -151,24 +155,33 @@ a {
 
 .nav {
   position: absolute;
-  height: 100vh;
-  padding: 6rem 1rem;
+  height: 60vh;
+  width: 25rem;
+  padding: 8rem 1rem;
   right: 0;
   top: 0;
-  background-color: cyan;
+  // background-color: cyan;
+  background: linear-gradient(to bottom,#23caae, #433b97);
+  border-radius: 0 0 0 30px;
   z-index: 0;
   overflow-y: hidden;
-  width: 19rem;
+  
+  transition: all 500ms ease-in-out;
   .item-title {
     margin-left: 0rem;
+    // transform: scale(1);
+    // display: block;
     transition: all 500ms ease-in-out;
+    
   }
   &.wrapped {
-    width: 9rem;
+    width: 10rem;
     transition: all 500ms ease-in-out;
 
     .item-title {
       margin-left: -50rem;
+      // transform: scale(0);
+      // display: none;
       transition: all 500ms ease-in-out;
     }
   }
@@ -179,8 +192,7 @@ a {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-end;
-    gap: 2rem;
-    background-color: blue;
+    gap: 3rem;
 
     .nav-item {
       display: flex;
@@ -194,8 +206,7 @@ a {
       justify-content: space-between;
       align-items: center;
       gap: 2rem;
-      background-color: brown;
-      font-size: 1.3rem;
+      font-size: 2rem;
       font-weight: bold;
       line-height: 100%;
 
@@ -205,8 +216,8 @@ a {
       .icon-game,
       .icon-statistics,
       .icon-team {
-        width: 3.3rem;
-        height: 3.3rem;
+        width: 4rem;
+        height: 4rem;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cstyle%3e.cls-2%7bfill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round%7d%3c/style%3e%3c/defs%3e%3cg data-name='Layer 2' id='Layer_2'%3e%3cg id='Workspace'%3e%3cpath style='fill:none' d='M0 0h24v24H0z'/%3e%3cpath class='cls-2' d='M6.5 9.5h8v8h-8z'/%3e%3cpath class='cls-2' d='M9.5 9.5v-3h8v8h-3'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: center;
@@ -240,6 +251,9 @@ a {
   }
 }
 
+
+
+
 .main {
   display: flex;
   justify-content: center;
@@ -251,10 +265,10 @@ a {
   justify-content: center;
   height: 5vh;
   z-index: 9;
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: bold;
   line-height: 100%;
-  background-color: dimgray;
+  background-color: rgb(156, 156, 156);
   .footer-container {
     display: flex;
     flex-direction: row;
@@ -262,8 +276,8 @@ a {
     align-items: center;
   }
   .rs-logo {
-    width: 5rem;
-    height: 3rem;
+    width: 7rem;
+    height: 4rem;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
