@@ -31,8 +31,8 @@ class App {
   }
 
   changeCurrentPage() {
-    this.view.learn.draw_selectors();
-    this.assignListeners();
+    this.view.textbook.draw_selectors();
+    // this.assignListeners();
     this.model
       .getPage(
         this.view.textbook.currentPage,
@@ -191,14 +191,14 @@ class App {
     console.log(pageNumbers);
     for (let i = 0; i < pageNumbers.length; i += 1) {
       pageNumbers[i].addEventListener('click', () => {
-        this.view.learn.currentPage = Number(pageNumbers[i].textContent);
+        this.view.textbook.currentPage = Number(pageNumbers[i].textContent);
         this.changeCurrentPage();
       });
     }
     if (nxt) {
       nxt.addEventListener('click', () => {
-        if (this.view.learn.currentPage < 29) {
-          this.view.learn.currentPage += 1;
+        if (this.view.textbook.currentPage < 29) {
+          this.view.textbook.currentPage += 1;
 
           this.changeCurrentPage();
         }
@@ -207,8 +207,8 @@ class App {
 
     if (prv) {
       prv.addEventListener('click', () => {
-        if (this.view.learn.currentPage > 0) {
-          this.view.learn.currentPage -= 1;
+        if (this.view.textbook.currentPage > 0) {
+          this.view.textbook.currentPage -= 1;
 
           this.changeCurrentPage();
         }
@@ -386,10 +386,14 @@ class App {
       this.model
         .createUser(user)
         .then((data: IUser) => {
-          // user.id = <string>data.id;
-          console.log(data);
-          alert(`${username} все хорошо.`);
-          console.log(user);
+          if (data.error) {
+            data.error.errors.forEach((err) => {
+              alert(err.message);
+            });
+          } else {
+            alert(`${username} все хорошо.`);
+            console.log(user);
+          }
         })
         .catch(() => alert(`${username} уже зарегистрирован.`));
     }
