@@ -197,6 +197,7 @@ class View {
         this.refreshValues();
         break;
       case 'next_question':
+        console.log('check');
         this.clearAnswerButtons();
         if (this.progress < 10) {
           this.progress++;
@@ -207,6 +208,7 @@ class View {
           });
           promise.then(() => this.playAudio()).catch((err) => console.log(err));
         } else {
+          this.refreshValues();
           this.showResults();
         }
         break;

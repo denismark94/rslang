@@ -7,10 +7,8 @@ class App {
   public view: View;
 
   public model: Model;
-  //   public learnPage: LearnPage;
-  //   public trainPage: TrainPage;
 
-  public state = 'games';
+  public state = 'main';
 
   public game: string;
 
@@ -32,7 +30,7 @@ class App {
 
   changeCurrentPage() {
     this.view.textbook.draw_selectors();
-    // this.assignListeners();
+    this.assignTextBookListeners();
     this.model
       .getPage(
         this.view.textbook.currentPage,
@@ -185,45 +183,6 @@ class App {
   }
 
   assignListeners() {
-    const prv = <HTMLLIElement>document.querySelector('.prev');
-    const nxt = <HTMLLIElement>document.querySelector('.next');
-    const pageNumbers = <NodeList>document.querySelectorAll('.numb');
-    console.log(pageNumbers);
-    for (let i = 0; i < pageNumbers.length; i += 1) {
-      pageNumbers[i].addEventListener('click', () => {
-        this.view.textbook.currentPage = Number(pageNumbers[i].textContent);
-        this.changeCurrentPage();
-      });
-    }
-    if (nxt) {
-      nxt.addEventListener('click', () => {
-        if (this.view.textbook.currentPage < 29) {
-          this.view.textbook.currentPage += 1;
-
-          this.changeCurrentPage();
-        }
-      });
-    }
-
-    if (prv) {
-      prv.addEventListener('click', () => {
-        if (this.view.textbook.currentPage > 0) {
-          this.view.textbook.currentPage -= 1;
-
-          this.changeCurrentPage();
-        }
-      });
-    }
-
-    const chapterSelector = <HTMLSelectElement>(
-      document.getElementById('chapter_selector')
-    );
-
-    chapterSelector.addEventListener('change', (event) => {
-      const chapter = (<HTMLSelectElement>event.target).value;
-      this.view.textbook.currentChapter = Number(chapter);
-      this.changeCurrentPage();
-    });
 
     const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
     const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
@@ -235,7 +194,7 @@ class App {
     btnLogin.addEventListener('click', () => {
       this.login();
     });
-    
+
     const sprintBtn = <HTMLButtonElement>document.getElementById('btn_sprint');
     sprintBtn.addEventListener('click', () => {
       this.game = 'sprint';
@@ -299,6 +258,47 @@ class App {
     showAnswerBtn.addEventListener('click', (event) =>
       this.view.checkAnswer(event)
     );
+  }
+
+  assignTextBookListeners() {
+    const prv = <HTMLLIElement>document.querySelector('.prev');
+    const nxt = <HTMLLIElement>document.querySelector('.next');
+    const pageNumbers = <NodeList>document.querySelectorAll('.numb');
+    for (let i = 0; i < pageNumbers.length; i += 1) {
+      pageNumbers[i].addEventListener('click', () => {
+        this.view.textbook.currentPage = Number(pageNumbers[i].textContent);
+        this.changeCurrentPage();
+      });
+    }
+    if (nxt) {
+      nxt.addEventListener('click', () => {
+        if (this.view.textbook.currentPage < 29) {
+          this.view.textbook.currentPage += 1;
+
+          this.changeCurrentPage();
+        }
+      });
+    }
+
+    if (prv) {
+      prv.addEventListener('click', () => {
+        if (this.view.textbook.currentPage > 0) {
+          this.view.textbook.currentPage -= 1;
+
+          this.changeCurrentPage();
+        }
+      });
+    }
+
+    const chapterSelector = <HTMLSelectElement>(
+      document.getElementById('chapter_selector')
+    );
+
+    chapterSelector.addEventListener('change', (event) => {
+      const chapter = (<HTMLSelectElement>event.target).value;
+      this.view.textbook.currentChapter = Number(chapter);
+      this.changeCurrentPage();
+    });
   }
 
   login() {
