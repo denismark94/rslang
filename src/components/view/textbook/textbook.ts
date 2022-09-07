@@ -89,9 +89,18 @@ class TextBookSection {
     ulTag.innerHTML = liTag;
   }
 
+  playWord(audio: HTMLAudioElement) {
+    return new Promise((resolve, reject) => {
+      audio.play();
+      audio.addEventListener('ended', () => {
+        resolve();
+      });
+    });
+  }
+
   draw_word(content: IWord): HTMLDivElement {
     const wordCard = document.createElement('div');
-    //wordCard.id = content.id;
+    wordCard.id = '_' + content.id;
     wordCard.className = 'word-card';
     const img = document.createElement('img');
     img.className = 'association';
@@ -124,24 +133,28 @@ class TextBookSection {
     <audio class='word_audio' src="${
       this.baseURL + '/' + content.audio
     }"></audio>
-    <audio id='example_audio' src="${
+    <audio class='example_audio' src="${
       this.baseURL + '/' + content.audioExample
     }"></audio>
-    <audio id='meaning_audio' src="${
+    <audio class='meaning_audio' src="${
       this.baseURL + '/' + content.audioMeaning
     }"></audio>`;
+
     playButton.addEventListener('click', () => {
-      console.log(this);
-      const audio_1 = <HTMLAudioElement>document.querySelector('.word_audio');
-      // const audio_2 = <HTMLAudioElement>(
-      //   document.getElementById('example_audio')
-      // );
-      // const audio_3 = <HTMLAudioElement>(
-      //   document.getElementById('meaning_audio')
-      // );
-      audio_1.play().catch((err) => console.log(err));
-      //audio_2.play().catch((err) => console.log(err));
-      //audio_3.play().catch((err) => console.log(err));
+      const audio_1 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .word_audio`)
+      );
+      console.log(audio_1);
+      const audio_2 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .example_audio`)
+      );
+      const audio_3 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .meaning_audio`)
+      );
+
+      this.playWord(audio_1)
+        .then(() => this.playWord(audio_2))
+        .then(() => this.playWord(audio_3));
     });
     titleBlock.appendChild(playButton);
     contentBlock.appendChild(titleBlock);

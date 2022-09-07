@@ -179,7 +179,7 @@ class App {
     const prv = <HTMLLIElement>document.querySelector('.prev');
     const nxt = <HTMLLIElement>document.querySelector('.next');
     const pageNumbers = <NodeList>document.querySelectorAll('.numb');
-    console.log(pageNumbers);
+
     for (let i = 0; i < pageNumbers.length; i += 1) {
       pageNumbers[i].addEventListener('click', () => {
         this.view.learn.currentPage = Number(pageNumbers[i].textContent);
