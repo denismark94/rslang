@@ -5,6 +5,8 @@ declare class App {
     model: Model;
     state: string;
     game: string;
+    name: string;
+    token: string;
     constructor();
     start(): void;
     changeCurrentPage(): void;
