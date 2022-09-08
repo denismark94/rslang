@@ -196,6 +196,8 @@ class App {
 
   assignListeners() {
 
+=======
+
     const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
     const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
 
@@ -312,7 +314,8 @@ class App {
     });
   }
 
-  assignTextBookListeners() {
+  assignTextBookListeners() { 
+  
     const prv = <HTMLLIElement>document.querySelector('.prev');
     const nxt = <HTMLLIElement>document.querySelector('.next');
     const pageNumbers = <NodeList>document.querySelectorAll('.numb');

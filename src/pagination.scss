@@ -38,3 +38,47 @@
     background-color: #20b2aa;
   }
 }
+.wrap-select {
+  padding: 0.8rem 1rem;
+  background-color: #fff;
+  border-radius: 5rem;
+  font-size: 1.8rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+  #chapter_selector {
+    color: #20b2aa;
+    height: 45px;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+
+    option {
+      height: 45px;
+    }
+  }
+}
+
+.audio {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 10px;
+  border: 1px solid gray;
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
+  transition: all 0.3s ease;
+  svg {
+    fill: #20b2aa;
+  }
+}
+
+.audio:hover {
+  cursor: pointer;
+  border: 2px solid #20b2aa;
+  background-color: #20b2aa;
+  svg {
+    fill: #fff;
+  }
+}

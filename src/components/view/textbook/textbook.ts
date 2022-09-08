@@ -32,7 +32,6 @@ class TextBookSection {
 
     let liTag = '';
     let activeLi;
-
     let beforePage = this.currentPage - 1;
     let afterPage = this.currentPage + 1;
 
@@ -89,6 +88,15 @@ class TextBookSection {
     ulTag.innerHTML = liTag;
   }
 
+  playWord(audio: HTMLAudioElement) {
+    return new Promise((resolve, reject) => {
+      audio.play();
+      audio.addEventListener('ended', () => {
+        resolve();
+      });
+    });
+  }
+
   // reassign_selectors() {
   //   const prev = <HTMLButtonElement>document.getElementById('pagprev');
   //   prev.disabled = false;
@@ -108,6 +116,7 @@ class TextBookSection {
 
   draw_word(content: IWord): HTMLDivElement {
     const wordCard = document.createElement('div');
+    wordCard.id = '_' + content.id;
     wordCard.className = 'word-card';
     const img = document.createElement('img');
     img.className = 'association';
@@ -132,9 +141,37 @@ class TextBookSection {
     spanTranslate.className = 'translate';
     spanTranslate.textContent = content.wordTranslate;
     titleBlock.appendChild(spanTranslate);
+
     const playButton = document.createElement('button');
     playButton.className = 'audio';
     playButton.textContent = 'Play';
+    playButton.innerHTML = `<svg class="icon_audio" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+    <audio class='word_audio' src="${
+      this.baseURL + '/' + content.audio
+    }"></audio>
+    <audio class='example_audio' src="${
+      this.baseURL + '/' + content.audioExample
+    }"></audio>
+    <audio class='meaning_audio' src="${
+      this.baseURL + '/' + content.audioMeaning
+    }"></audio>`;
+
+    playButton.addEventListener('click', () => {
+      const audio_1 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .word_audio`)
+      );
+      console.log(audio_1);
+      const audio_2 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .example_audio`)
+      );
+      const audio_3 = <HTMLAudioElement>(
+        document.querySelector(`#${wordCard.id} .meaning_audio`)
+      );
+
+      this.playWord(audio_1)
+        .then(() => this.playWord(audio_2))
+        .then(() => this.playWord(audio_3));
+    });
     titleBlock.appendChild(playButton);
     contentBlock.appendChild(titleBlock);
 
