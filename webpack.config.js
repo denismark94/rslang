@@ -18,6 +18,7 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
+      favicon: './assets/icons/favicon.ico',
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
@@ -32,6 +33,20 @@ const config = {
         options: {
           configFile: 'tsconfig.json'
         }
+      },
+      {
+        test: /\.(?:gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
+        generator: {
+        filename: 'assets/images/[name][ext]'
+        },
+      },
+      {
+        test: /\.(?:ico|svg)$/,
+        type: 'asset/resource',
+        generator: {
+        filename: 'assets/icons/[name][ext]'
+        },
       },
       {
         test: /\.css$/i,

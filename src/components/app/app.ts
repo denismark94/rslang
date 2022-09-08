@@ -7,14 +7,21 @@ class App {
   public view: View;
 
   public model: Model;
-  //   public learnPage: LearnPage;
-  //   public trainPage: TrainPage;
 
-  public state = 'textbook';
+  public state = 'main';
+
+  public game: string;
+
+  name: string;
+
+  token: string;
 
   constructor() {
     this.model = new Model();
     this.view = new View(this.model.baseURL);
+    this.name = '';
+    this.token = '';
+    this.game = 'sprint';
     window.onpopstate = (ev: Event) => this.route(ev);
   }
 
@@ -22,15 +29,27 @@ class App {
     this.view.draw(this.state);
     this.assignListeners();
     this.changeCurrentPage();
+    if (localStorage.getItem('name')) {
+      this.name = <string>localStorage.getItem('name');
+      this.token = <string>localStorage.getItem('token');
+      (<HTMLElement>document.querySelector('.name-login')).innerHTML =
+        this.name;
+      (<HTMLButtonElement>document.querySelector('.btn-login')).classList.add(
+        'active',
+      );
+    }
   }
 
   changeCurrentPage() {
-    this.view.learn.draw_selectors();
-    this.assignListeners();
+    this.view.textbook.draw_selectors();
+    this.assignTextBookListeners();
     this.model
-      .getPage(this.view.learn.currentPage, this.view.learn.currentChapter)
+      .getPage(
+        this.view.textbook.currentPage,
+        this.view.textbook.currentChapter,
+      )
       .then((data: IWord[]) => {
-        this.view.learn.draw_page(data);
+        this.view.textbook.draw_page(data);
       })
       .catch((err) => console.log(err));
   }
@@ -105,7 +124,7 @@ class App {
           .getUser(user.id, user.token)
           .then((data) => {
             console.log(data);
-            user.name = (<IUser>data).name;
+            // user.name = (<IUser>data).name;
             user.email = (<IUser>data).email;
             user.password = <string>(<IUser>data).password;
           })
@@ -176,20 +195,140 @@ class App {
   }
 
   assignListeners() {
+
+=======
+
+    const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
+    const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
+
+    btnSign.addEventListener('click', () => {
+      this.register();
+    });
+
+    btnLogin.addEventListener('click', () => {
+      this.login();
+    });
+
+    const sprintBtn = <HTMLButtonElement>document.getElementById('btn_sprint');
+    sprintBtn.addEventListener('click', () => {
+      this.game = 'sprint';
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showGame(this.game);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const audioBtn = <HTMLButtonElement>(
+      document.getElementById('btn_audiochallenge')
+    );
+    audioBtn.addEventListener('click', () => {
+      this.game = 'audiochallenge';
+      this.model
+        .getBook()
+        .then((data: IWord[]) => {
+          this.view.wordlist = data;
+          this.view.showGame(this.game);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    const repeatBtn = <HTMLButtonElement>(
+      document.getElementById('repeat_sprint')
+    );
+    repeatBtn.addEventListener('click', () => this.view.showGame(this.game));
+
+    const gamePicker = <HTMLButtonElement>(
+      document.getElementById('choose_game')
+    );
+    gamePicker.addEventListener('click', () => this.view.showPicker());
+
+    const yesbtn = <HTMLButtonElement>document.getElementById('btn_yes');
+    yesbtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const nobtn = <HTMLButtonElement>document.getElementById('btn_no');
+    nobtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const playAudioBtn = <HTMLButtonElement>(
+      document.getElementById('play_audio')
+    );
+    playAudioBtn.addEventListener('click', () => this.view.playAudio());
+
+    const nextQBtn = <HTMLButtonElement>(
+      document.getElementById('next_question')
+    );
+    nextQBtn.addEventListener('click', (event) => this.view.checkAnswer(event));
+
+    const answerBtns = document.querySelectorAll('#options button');
+    answerBtns.forEach((btn) => {
+      btn.addEventListener('click', (event) => this.view.checkAnswer(event));
+    });
+
+    const showAnswerBtn = <HTMLButtonElement>(
+      document.getElementById('show_answer')
+    );
+    showAnswerBtn.addEventListener('click', (event) =>
+      this.view.checkAnswer(event),
+    );
+
+    const btnHeader = <HTMLElement>document.querySelector('.header');
+    const popupLogin = <HTMLElement>document.querySelector('.popup-login');
+    const slideNav = <HTMLElement>document.querySelector('.nav');
+    const body = <HTMLElement>document.querySelector('.body');
+    const iconLogin = <HTMLButtonElement>document.querySelector('.btn-login');
+
+    (<HTMLInputElement>document.querySelector('#sign-name')).value = '';
+    (<HTMLInputElement>document.querySelector('#sign-email')).value = '';
+    (<HTMLInputElement>document.querySelector('#sign-password')).value = '';
+    (<HTMLInputElement>document.querySelector('#login-email')).value = '';
+    (<HTMLInputElement>document.querySelector('#login-password')).value = '';
+
+    btnHeader.addEventListener('click', (event: MouseEvent) => {
+      if ((event.target as HTMLElement).closest('.btn-nav')) {
+        slideNav.classList.toggle('wrapped');
+        (<HTMLElement>document.querySelector('.btn-nav')).classList.toggle(
+          'active'
+        );
+      }
+      if ((event.target as HTMLElement).closest('.btn-login')) {
+        if (iconLogin.classList.contains('active')) {
+          iconLogin.classList.remove('active');
+          (<HTMLElement>document.querySelector('.name-login')).innerHTML = '';
+          this.token = '';
+          this.name = '';
+          localStorage.setItem('name', <string>'');
+          localStorage.setItem('token', <string>'');
+        } else {
+          popupLogin.classList.toggle('active');
+          if (popupLogin.classList.contains('active')) {
+            body.classList.add('active');
+          }
+        }
+      }
+      if ((event.target as HTMLElement).classList.contains('popup-login')) {
+        popupLogin.classList.remove('active');
+        body.classList.remove('active');
+      }
+    });
+  }
+
+  assignTextBookListeners() { 
+  
     const prv = <HTMLLIElement>document.querySelector('.prev');
     const nxt = <HTMLLIElement>document.querySelector('.next');
     const pageNumbers = <NodeList>document.querySelectorAll('.numb');
-
     for (let i = 0; i < pageNumbers.length; i += 1) {
       pageNumbers[i].addEventListener('click', () => {
-        this.view.learn.currentPage = Number(pageNumbers[i].textContent);
+        this.view.textbook.currentPage = Number(pageNumbers[i].textContent);
         this.changeCurrentPage();
       });
     }
     if (nxt) {
       nxt.addEventListener('click', () => {
-        if (this.view.learn.currentPage < 29) {
-          this.view.learn.currentPage += 1;
+        if (this.view.textbook.currentPage < 29) {
+          this.view.textbook.currentPage += 1;
 
           this.changeCurrentPage();
         }
@@ -198,8 +337,8 @@ class App {
 
     if (prv) {
       prv.addEventListener('click', () => {
-        if (this.view.learn.currentPage > 0) {
-          this.view.learn.currentPage -= 1;
+        if (this.view.textbook.currentPage > 0) {
+          this.view.textbook.currentPage -= 1;
 
           this.changeCurrentPage();
         }
@@ -212,9 +351,130 @@ class App {
 
     chapterSelector.addEventListener('change', (event) => {
       const chapter = (<HTMLSelectElement>event.target).value;
-      this.view.learn.currentChapter = Number(chapter);
+      this.view.textbook.currentChapter = Number(chapter);
       this.changeCurrentPage();
     });
+  }
+
+  login() {
+    const iconLogin = <HTMLButtonElement>document.querySelector('.btn-login');
+    const email = (<HTMLInputElement>document.querySelector('#login-email'))
+      .value;
+    const password = (<HTMLInputElement>(
+      document.querySelector('#login-password')
+    )).value;
+    const usernameTitle = <HTMLElement>document.querySelector('.name-login');
+
+    if (email == '' || password == '') {
+      alert(' Требуется email или пароль.');
+    }
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    this.model
+      .login(user)
+      .then((data: IUser) => {
+        iconLogin.classList.add('active');
+        usernameTitle.innerHTML = <string>data.name;
+        alert(`${<string>data.name}  Добро пожаловать.`);
+        this.name = <string>data.name;
+        localStorage.setItem('name', <string>data.name);
+        localStorage.setItem('token', <string>data.token);
+        (
+          document.querySelector('.popup-login') as HTMLElement
+        ).classList.remove('active');
+        (document.querySelector('.body') as HTMLElement).classList.remove(
+          'active'
+        );
+      })
+      .catch((err) => alert(err));
+
+    (<HTMLInputElement>document.querySelector('#login-email')).value = '';
+    (<HTMLInputElement>document.querySelector('#login-password')).value = '';
+    return;
+  }
+
+  register() {
+    const username = (<HTMLInputElement>document.querySelector('#sign-name'))
+      .value;
+    const email = (<HTMLInputElement>document.querySelector('#sign-email'))
+      .value;
+    const password = (<HTMLInputElement>(
+      document.querySelector('#sign-password')
+    )).value;
+
+    if (email.length == 0 || password.length == 0 || username.length == 0) {
+      alert(' Требуется ввести все данные.');
+    } else if (password.length <= 3) {
+      alert('Требуется ввести корректный пароль не менее 8 символов.');
+    } else {
+      const user = {
+        name: username,
+        email: email,
+        password: password,
+      };
+
+      this.model
+        .createUser(user)
+        .then((data: IUser) => {
+          if (data.error) {
+            data.error.errors.forEach((err) => {
+              alert(err.message);
+            });
+          } else {
+            alert(`${username} все хорошо.`);
+            this.model
+              .login(user)
+              .then((dataL: IUser) => {
+                (<HTMLButtonElement>(
+                  document.querySelector('.btn-login')
+                )).classList.add('active');
+                (<HTMLElement>document.querySelector('.name-login')).innerHTML =
+                  <string>dataL.name;
+                alert(`${<string>dataL.name}  Добро пожаловать.`);
+                this.name = user.name;
+                localStorage.setItem('name', user.name);
+                localStorage.setItem('token', <string>dataL.token);
+                (
+                  document.querySelector('.popup-login') as HTMLElement
+                ).classList.remove('active');
+                (
+                  document.querySelector('.body') as HTMLElement
+                ).classList.remove('active');
+              })
+              .catch((err) => alert(err));
+          }
+        })
+        .catch(() => alert(`${username} уже зарегистрирован.`));
+
+      // this.model
+      //   .login(user)
+      //   .then((dataL: IUser) => {
+      //     (<HTMLButtonElement>(
+      //       document.querySelector('.btn-login')
+      //     )).classList.add('active');
+      //     (<HTMLElement>document.querySelector('.name-login')).innerHTML = <
+      //       string
+      //     >dataL.name;
+      //     alert(`${<string>dataL.name}  Добро пожаловать.`);
+      //     this.name = user.name;
+      //     localStorage.setItem('name', user.name);
+      //     localStorage.setItem('token', <string>dataL.token);
+      //     (
+      //       document.querySelector('.popup-login') as HTMLElement
+      //     ).classList.remove('active');
+      //     (document.querySelector('.body') as HTMLElement).classList.remove(
+      //       'active',
+      //     );
+      //   })
+      //   .catch((err) => alert(err));
+    }
+
+    (<HTMLInputElement>document.querySelector('#sign-name')).value = '';
+    (<HTMLInputElement>document.querySelector('#sign-email')).value = '';
+    (<HTMLInputElement>document.querySelector('#sign-password')).value = '';
   }
 }
 

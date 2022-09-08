@@ -10,29 +10,27 @@
 		justify-content: center;
 		align-items: center;
 		background-color:rgba(0, 0, 0, 0.9);
-		// background-color:rgba(0, 0, 0, 1);
 	}
 }
 .popup-main {
-	width: 25rem;
-	height: 35rem;
+	width: 40rem;
+	height: 50rem;
 	overflow: hidden;
-	// background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
 	background: linear-gradient(to bottom, #100d29, #433b97, #4c4cd6);
 	border-radius: 3rem;
 	box-shadow: 5px 20px 50px #000;
 }
-#chk{
+#chk {
 	display: none;
 }
-.signup{
+.signup {
 	position: relative;
 	width:100%;
 	height: 100%;
 }
 .label-login {
 	color: #fff;
-	font-size: 2.3em;
+	font-size: 4rem;
 	justify-content: center;
 	display: flex;
 	margin: 60px;
@@ -41,9 +39,10 @@
 	transition: .5s ease-in-out;
 }
 .input-login {
-	width: 60%;
-	height: 3rem;
+	width: 70%;
+	height: 4.5rem;
 	background: #e0dede;
+	font-size: 1.5rem;
 	justify-content: center;
 	display: flex;
 	margin: 20px auto;
@@ -52,15 +51,15 @@
 	outline: none;
 	border-radius: 5px;
 }
-.btn-login-form{
-	width: 60%;
-	height: 3rem;
+.btn-login-form {
+	width: 70%;
+	height: 5rem;
 	margin: 10px auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
 	background: #573b8a;
-	font-size: 1em;
+	font-size: 2rem;
 	font-weight: bold;
 	margin-top: 20px;
 	outline: none;
@@ -72,20 +71,22 @@
 		background: #6d44b8;
 	}
 }
-.login{
-	height: 460px;
+.login {
+	height: 40rem;
+	// padding-top: 10px;
 	background: #eee;
 	border-radius: 60% / 10%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 	& .label-login {
+		// margin-top: 10px;
 		color: #573b8a;
 		transform: scale(.6);
 	}
 }
 
 #chk:checked ~ .login{
-	transform: translateY(-35rem);
+	transform: translateY(-50rem);
 }
 #chk:checked ~ .login .label-login {
 	transform: scale(1);	

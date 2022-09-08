@@ -32,7 +32,6 @@ class TextBookSection {
 
     let liTag = '';
     let activeLi;
-
     let beforePage = this.currentPage - 1;
     let afterPage = this.currentPage + 1;
 
@@ -97,6 +96,23 @@ class TextBookSection {
       });
     });
   }
+
+  // reassign_selectors() {
+  //   const prev = <HTMLButtonElement>document.getElementById('pagprev');
+  //   prev.disabled = false;
+  //   const cur = <HTMLButtonElement>document.getElementById('pagcur');
+  //   const next = <HTMLButtonElement>document.getElementById('pagnext');
+  //   next.disabled = false;
+  //   switch (this.currentPage) {
+  //     case 0:
+  //       prev.disabled = true;
+  //       break;
+  //     case 29:
+  //       next.disabled = true;
+  //       break;
+  //   }
+  //   cur.textContent = `Страница ${this.currentPage + 1}`;
+  // }
 
   draw_word(content: IWord): HTMLDivElement {
     const wordCard = document.createElement('div');

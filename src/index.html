@@ -1,212 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RS Lang</title>
-  </head>
 
-  <body class="body">
-    <header class="header">
-      <div class="header-container">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RS Lang</title>
+</head>
+
+<body class="body">
+  <header class="header">
+    <div class="header-container">
+      <div class="container-icon-login">
         <div class="btn-login"></div>
-        <a href="" class="btn-home">
-          <h2 class="title">RS Lang</h2>
-        </a>
-        <div class="btn-nav"><span></span><span></span><span></span></div>
+        <p class="name-login"></p>
       </div>
-      <div class="nav wrapped">
-        <ul class="nav-list-items">
-          <li class="nav-item">
-            <a href="#main">
-              <p class="item-title">Главная</p>
-              <div class="icon-home"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#textbook">
-              <p class="item-title">Учебник</p>
-              <div class="icon-book"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#dict">
-              <p class="item-title">Словарь</p>
-              <div class="icon-dictionary"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#games">
-              <p class="item-title">Мини-игры</p>
-              <div class="icon-game"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#stats">
-              <p class="item-title">Статистика</p>
-              <div class="icon-statistics"></div>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#about">
-              <p class="item-title">О команде</p>
-              <div class="icon-team"></div>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="popup-login">
-        <div class="popup-main">
-          <input type="checkbox" id="chk" aria-hidden="true" />
-          <div class="signup">
-            <form>
-              <label for="chk" aria-hidden="true" class="label-login"
-                >Sign up</label
-              >
-              <input
-                type="text"
-                name="txt"
-                placeholder="User name"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="password"
-                name="pswd"
-                placeholder="Password"
-                required=""
-                class="input-login"
-              />
-              <button class="btn-login-form">Sign up</button>
-            </form>
-          </div>
+      <a href="#main" class="btn-home">
+        <h2 class="title">RS Lang</h2>
+      </a>
+      <div class="btn-nav"><span></span><span></span><span></span></div>
+    </div>
+    <div class="nav wrapped">
+      <ul class="nav-list-items">
+        <li class="nav-item">
+          <a href="#main">
+            <p class="item-title">Главная</p>
+            <div class="icon-home"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#textbook">
+            <p class="item-title">Учебник</p>
+            <div class="icon-book"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#dict">
+            <p class="item-title">Словарь</p>
+            <div class="icon-dictionary"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#games">
+            <p class="item-title">Мини-игры</p>
+            <div class="icon-game"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#stats">
+            <p class="item-title">Статистика</p>
+            <div class="icon-statistics"></div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#about">
+            <p class="item-title">О команде</p>
+            <div class="icon-team"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="popup-login">
+      <div class="popup-main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+        <div class="signup">
+          <form>
+            <label for="chk" aria-hidden="true" class="label-login">Sign up</label>
+            <input id="sign-name" type="text" name="txt" placeholder="User name" required="" class="input-login" />
+            <input id="sign-email" type="email" name="email" placeholder="Email" required="" class="input-login" />
+            <input id="sign-password" type="password" name="pswd" placeholder="Password" required=""
+              class="input-login" />
+            <button id="btn-sign" class="btn-login-form">Sign up</button>
+          </form>
+        </div>
 
-          <div class="login">
-            <form>
-              <label for="chk" aria-hidden="true" class="label-login"
-                >Login</label
-              >
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required=""
-                class="input-login"
-              />
-              <input
-                type="password"
-                name="pswd"
-                placeholder="Password"
-                required=""
-                class="input-login"
-              />
-              <button class="btn-login-form">Login</button>
-            </form>
+        <div class="login">
+          <form>
+            <label for="chk" aria-hidden="true" class="label-login">Login</label>
+            <input id="login-email" type="email" name="email" placeholder="Email" required="" class="input-login" />
+            <input id="login-password" type="password" name="pswd" placeholder="Password" required=""
+              class="input-login" />
+            <button id="btn-login" class="btn-login-form">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="main" id="main">
+    <div class="wrapper">
+      <div class="main-container">
+        <section class="page-section">
+          <h3 class="page-section__title">Наши преимущества</h3>
+          <div class="benefits-list">
+            <div class="benefits-list__item">
+              <h4>Учебник</h4>
+              <p>
+                Учебник состоит из шести разделов, в каждом разделе 30
+                страниц, на каждой странице 20 слов для изучения
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Словарь</h4>
+              <p>
+                Авторизованные пользователи могут сохранять сложные слова в
+                словарь
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Игры</h4>
+              <p>
+                Обучение в игре, тренировки сделаны так, что их интересно
+                проходить
+              </p>
+            </div>
+            <div class="benefits-list__item">
+              <h4>Статистика</h4>
+              <p>
+                На странице статистики отображается краткосрочная статистика
+                по мини-играм и по словам за каждый день изучения
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
+        <section class="page-section">
+          <h3 class="page-section__title">
+            Возможности приложения(Здесь нехилый видеообзор)
+          </h3>
+          <div>
+            <div class="wrap-iframe">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CwRvM2TfYbs"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </section>
+        <section class="page-section">
+          <h3 class="page-section__title">О команде</h3>
+          <div class="team-list">
+            <a href="https://github.com/denismark94" class="card">
+              <div id="den" class="card-photo"></div>
+              <p class="card-name">Денис</p>
+              <p class="card-desc">
+                Разработчик
+              </p>
+            </a>
+            <a href="https://github.com/hell-llex" class="card">
+              <div id="ale" class="card-photo"></div>
+              <p class="card-name">Александр</p>
+              <p class="card-desc">
+                Разработчик
+              </p>
+            </a>
+            <a href="https://github.com/Gangeya" class="card">
+              <div id="evg" class="card-photo"></div>
+              <p class="card-name">Евгений</p>
+              <p class="card-desc">
+                Разработчик
+              </p>
+            </a>
+          </div>
+        </section>
       </div>
-    </header>
-    <main class="main" id="main">
-      <div class="wrapper">
-        <div class="main-container">
-          <section class="page-section">
-            <h3 class="page-section__title">Наши преимущества</h3>
-            <div class="benefits-list">
-              <div class="benefits-list__item">
-                <h4>Учебник</h4>
-                <p>
-                  Учебник состоит из шести разделов, в каждом разделе 30
-                  страниц, на каждой странице 20 слов для изучения
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Словарь</h4>
-                <p>
-                  Авторизованные пользователи могут сохранять сложные слова в
-                  словарь
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Игры</h4>
-                <p>
-                  Обучение в игре, тренировки сделаны так, что их интересно
-                  проходить
-                </p>
-              </div>
-              <div class="benefits-list__item">
-                <h4>Статистика</h4>
-                <p>
-                  На странице статистики отображается краткосрочная статистика
-                  по мини-играм и по словам за каждый день изучения
-                </p>
-              </div>
-            </div>
-          </section>
-          <section class="page-section">
-            <h3 class="page-section__title">
-              Возможности приложения(Здесь нехилый видеообзор)
-            </h3>
-            <div>
-              <div class="wrap-iframe">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/CwRvM2TfYbs"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </div>
-          </section>
-          <section class="page-section">
-            <h3 class="page-section__title">О команде</h3>
-            <div class="team-list">
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Денис</p>
-                <p class="card-desc">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Voluptatem vero minima impedit fugit eaque quia veniam rem,
-                  perspiciatis earum unde aperiam illo nobis cupiditate a qui
-                  nisi sequi aliquam necessitatibus?
-                </p>
-              </div>
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Александр</p>
-                <p class="card-desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                  aliquam modi doloremque animi ipsa hic natus incidunt, earum
-                  nesciunt dolorum ratione officiis eos nihil sunt, provident
-                  dignissimos consequatur repellat. Impedit!
-                </p>
-              </div>
-              <div class="card">
-                <div class="card-photo">Фоточка</div>
-                <p class="card-name">Евгений</p>
-                <p class="card-desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium odit quas eos, laboriosam quasi esse ad adipisci
-                  ducimus non error minus repellendus debitis expedita fuga
-                  totam, numquam molestias ut commodi.
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </main>
-    <main class="main" id="textbook">
+    </div>
+  </main>
+  <main class="main" id="textbook">
       <div class="controls">
         <div class="wrap-select">
           <select id="chapter_selector">
@@ -224,17 +182,79 @@
         </div>
       </div>
       <div class="words"></div>
-    </main>
-    <footer class="footer">
-      <div class="wrapper">
-        <div class="footer-container">
-          <a href="https://app.rs.school" class="rs-logo"></a>
-          <a href="#" class="author">Денис</a>
-          <a href="https://github.com/hell-llex" class="author">Александр</a>
-          <a href="#" class="author">Евгений</a>
-          <p class="date">2022</p>
+  </main>
+    <main class="main" id="games">
+      <div class="games_picker">
+        <div class="sprint option">
+          <h2>Спринт</h2>
+          <p>Цель игры - определить, верно ли переведено слово. У вас есть 60 секунд.</p>
+          <p>Вы можете выбрать нужный ответ, кликнув по нему мышью или с помощью клавиш "влево" и "вправо" на клавиатуре</p>
+          <button id="btn_sprint">Начать</button>
+        </div>
+        <div class="audiochallenge option">
+          <h2>Аудиовызов</h2>
+          <p>Цель игры - выбрать верный перевод звучащего слова.</p>
+          <p>Вы можете выбрать нужный ответ, кликнув по нему мышью или с помощью цифровых клавиш от 1 до 5</p>
+          <p>Для повторного прослушивания нажмите на иконку динамика или нажмите Пробел</p>
+          <button id="btn_audiochallenge">Начать</button>
         </div>
       </div>
-    </footer>
-  </body>
+      <div class="board">
+        <div class="game hidden" id="sprint">
+          <h2 id="sprint_title">Спринт</h2>
+          <div id="score"><h2>0</h2></div>
+          <div id="countdown"><h2>60</h2></div>
+          <div id="question">
+            <h3 class="word">Alcohol</h3>
+            <h3 class="translate">Приключение</h3>
+          </div>
+          <button id="btn_yes">Верно</button>
+          <button id="btn_no">Неверно</button>
+        </div>
+        <div class="game hidden" id="audiochallenge">
+          <div id="progressbar"></div>
+          <button id="play_audio">
+            <svg class="icon_audio" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+            <audio id='example_audio' src=""></audio>
+          </button>
+          <div id="options">
+            <button id="opt_1">1</button>
+            <button id="opt_1">2</button>
+            <button id="opt_1">3</button>
+            <button id="opt_1">4</button>
+            <button id="opt_1">5</button>
+          </div>
+          <div id="other_options">
+            <button id="show_answer">Не знаю</button>
+            <button id="next_question">Далее</button>
+          </div>
+        </div>
+      </div>
+      <div class="results hidden">
+          <h2>Игра окончена</h2>
+          <h3>Правильных ответов: <span id="correct_cnt">0</span></h3>
+          <h3>Неправильных ответов: <span id="incorrect_cnt">0</span></h3>
+          <h3>Счёт: <span id="score_cnt">0</span></h3>
+          <div class='btn_box'>
+            <button id="repeat_sprint">Повторить</button>
+            <button id="choose_game">Выбор игры</button>
+        </div>
+      </div>
+    </div>
+    <div class="words">
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="wrapper">
+      <div class="footer-container">
+        <a href="https://rs.school/" class="rs-logo"></a>
+        <a href="https://github.com/denismark94" class="author">Денис</a>
+        <a href="https://github.com/hell-llex" class="author">Александр</a>
+        <a href="https://github.com/Gangeya" class="author">Евгений</a>
+        <p class="date">2022</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>
