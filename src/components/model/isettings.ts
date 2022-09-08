@@ -1,6 +1,8 @@
 interface ISettings {
   wordsPerDay: string;
-  optional?: {};
+  optional?: {
+    wordsPerMoth?: string;
+  };
 }
 
 export default ISettings;

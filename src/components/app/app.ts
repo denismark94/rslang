@@ -35,7 +35,7 @@ class App {
       (<HTMLElement>document.querySelector('.name-login')).innerHTML =
         this.name;
       (<HTMLButtonElement>document.querySelector('.btn-login')).classList.add(
-        'active',
+        'active'
       );
     }
   }
@@ -46,7 +46,7 @@ class App {
     this.model
       .getPage(
         this.view.textbook.currentPage,
-        this.view.textbook.currentChapter,
+        this.view.textbook.currentChapter
       )
       .then((data: IWord[]) => {
         this.view.textbook.draw_page(data);
@@ -195,9 +195,6 @@ class App {
   }
 
   assignListeners() {
-
-=======
-
     const btnSign = <HTMLButtonElement>document.querySelector('#btn-sign');
     const btnLogin = <HTMLButtonElement>document.querySelector('#btn-login');
 
@@ -270,7 +267,7 @@ class App {
       document.getElementById('show_answer')
     );
     showAnswerBtn.addEventListener('click', (event) =>
-      this.view.checkAnswer(event),
+      this.view.checkAnswer(event)
     );
 
     const btnHeader = <HTMLElement>document.querySelector('.header');
@@ -314,8 +311,7 @@ class App {
     });
   }
 
-  assignTextBookListeners() { 
-  
+  assignTextBookListeners() {
     const prv = <HTMLLIElement>document.querySelector('.prev');
     const nxt = <HTMLLIElement>document.querySelector('.next');
     const pageNumbers = <NodeList>document.querySelectorAll('.numb');

@@ -23,6 +23,7 @@
         "no-console": 0,
         "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": 2,
+        "@typescript-eslint/comma-dangle": "off",
         "prettier/prettier": ["error", { 
             "singleQuote": true,
             "endOfLine": "auto"

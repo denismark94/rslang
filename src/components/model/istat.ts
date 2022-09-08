@@ -1,6 +1,8 @@
 interface IStatistics {
   learnedWords: string;
-  options?: {};
+  options?: {
+    failedWords?: string;
+  };
 }
 
 export default IStatistics;
